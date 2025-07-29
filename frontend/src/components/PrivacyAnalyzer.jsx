@@ -66,8 +66,8 @@ const PrivacyAnalyzer = () => {
           clearInterval(interval);
           setIsPoisoning(false);
           toast({
-            title: "🧙‍♀️ Poisoning Ritual Complete",
-            description: "Your digital fingerprint has been scrambled. Trackers confused.",
+            title: "🌙 Digital Chaos Spell Complete",
+            description: "Your algorithmic shadow has been scrambled. The surveillance spirits are confused.",
             className: isAccessible ? "" : "glitch-text sparkle"
           });
           return 100;
