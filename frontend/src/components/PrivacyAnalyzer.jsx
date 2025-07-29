@@ -83,10 +83,13 @@ const PrivacyAnalyzer = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className={`text-4xl md:text-6xl font-bold mb-4 ${isAccessible ? "" : "glitch-text"} text-pink-500`}>
-            TRACK.EXPOSE
+            Euridice
           </h1>
           <p className={`text-xl mb-6 ${isAccessible ? "text-gray-600" : "text-cyan-400"}`}>
-            Unveiling the Surveillance Web • Y2K Digital Resistance
+            A Metadata Beholder • Digital Spellbook for Algorithmic Resistance
+          </p>
+          <p className={`text-sm mb-8 ${isAccessible ? "text-gray-500" : "text-purple-300"} max-w-2xl mx-auto italic`}>
+            "Your computer isn't neutral—systems track everything you do. This playful browser tool protects your privacy by scrambling the data websites collect about you."
           </p>
           
           {/* Accessibility Toggle */}
