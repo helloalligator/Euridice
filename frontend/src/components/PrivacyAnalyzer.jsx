@@ -92,22 +92,25 @@ const PrivacyAnalyzer = () => {
         setAnalysisData(data);
         setEnvironmentalImpact(data.environmentalImpact);
       } else {
-        // Use mock data for educational purposes
-        setTimeout(() => {
-          const mockAnalysis = mockData.getAnalysisData(url);
-          mockAnalysis.dataSource = "Educational Simulation";
-          mockAnalysis.isRealData = false;
-          setAnalysisData(mockAnalysis);
-          
-          // Mock environmental impact
-          setEnvironmentalImpact({
-            carbonFootprint: "0.0g CO₂",
-            dataTransfer: "0 MB",
-            energyUsed: "0 Wh",
-            serverRequests: 0,
-            message: "No environmental impact - using cached educational data"
-          });
-        }, 2000);
+        // Use mock data for educational purposes - don't try API call
+        const mockAnalysis = mockData.getAnalysisData(url);
+        mockAnalysis.dataSource = "Educational Simulation";
+        mockAnalysis.isRealData = false;
+        
+        // Mock environmental impact
+        const mockEnvironmentalImpact = {
+          carbonFootprint: "0.0g CO₂",
+          dataTransfer: "0 MB",
+          energyUsed: "0 Wh",
+          serverRequests: 0,
+          message: "No environmental impact - using cached educational data"
+        };
+        
+        // Simulate analysis time
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        setAnalysisData(mockAnalysis);
+        setEnvironmentalImpact(mockEnvironmentalImpact);
       }
     } catch (error) {
       toast({
@@ -117,12 +120,20 @@ const PrivacyAnalyzer = () => {
       });
       
       // Fallback to mock data
-      setTimeout(() => {
-        const mockAnalysis = mockData.getAnalysisData(url);
-        mockAnalysis.dataSource = "Educational Simulation (Fallback)";
-        mockAnalysis.isRealData = false;
-        setAnalysisData(mockAnalysis);
-      }, 1000);
+      const mockAnalysis = mockData.getAnalysisData(url);
+      mockAnalysis.dataSource = "Educational Simulation (Fallback)";
+      mockAnalysis.isRealData = false;
+      
+      const mockEnvironmentalImpact = {
+        carbonFootprint: "0.0g CO₂",
+        dataTransfer: "0 MB", 
+        energyUsed: "0 Wh",
+        serverRequests: 0,
+        message: "No environmental impact - using cached educational data"
+      };
+      
+      setAnalysisData(mockAnalysis);
+      setEnvironmentalImpact(mockEnvironmentalImpact);
     } finally {
       setIsAnalyzing(false);
     }
