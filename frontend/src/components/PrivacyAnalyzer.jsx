@@ -49,8 +49,8 @@ const PrivacyAnalyzer = () => {
       setAnalysisData(mockData.getAnalysisData(url));
       setIsAnalyzing(false);
       toast({
-        title: "Analysis Complete",
-        description: "Privacy violations detected and catalogued",
+        title: "Algorithmic Veil Pierced",
+        description: "The hidden mechanisms of surveillance have been revealed",
         className: isAccessible ? "" : "glitch-text"
       });
     }, 2000);
