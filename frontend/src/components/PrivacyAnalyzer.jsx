@@ -55,12 +55,77 @@ const PrivacyAnalyzer = () => {
       return;
     }
 
+    // Show consent modal for real data collection
+    if (!consentGiven) {
+      setShowConsent(true);
+      return;
+    }
+
     setIsAnalyzing(true);
-    // Simulate analysis with mock data
-    setTimeout(() => {
-      setAnalysisData(mockData.getAnalysisData(url));
+    setEnvironmentalImpact(null);
+
+    try {
+      if (useRealData && (browserCookiesConsent || webScrapingConsent)) {
+        // Call backend for real analysis
+        const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+        const response = await fetch(`${BACKEND_URL}/api/analyze`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            url,
+            options: {
+              includeBrowserCookies: browserCookiesConsent,
+              includeWebScraping: webScrapingConsent,
+              includeFingerprinting: true,
+              includeEnvironmentalMetrics: true
+            }
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        setAnalysisData(data);
+        setEnvironmentalImpact(data.environmentalImpact);
+      } else {
+        // Use mock data for educational purposes
+        setTimeout(() => {
+          const mockAnalysis = mockData.getAnalysisData(url);
+          mockAnalysis.dataSource = "Educational Simulation";
+          mockAnalysis.isRealData = false;
+          setAnalysisData(mockAnalysis);
+          
+          // Mock environmental impact
+          setEnvironmentalImpact({
+            carbonFootprint: "0.0g CO₂",
+            dataTransfer: "0 MB",
+            energyUsed: "0 Wh",
+            serverRequests: 0,
+            message: "No environmental impact - using cached educational data"
+          });
+        }, 2000);
+      }
+    } catch (error) {
+      toast({
+        title: "Analysis Failed",
+        description: "Could not complete real-time analysis. Using educational simulation.",
+        variant: "destructive"
+      });
+      
+      // Fallback to mock data
+      setTimeout(() => {
+        const mockAnalysis = mockData.getAnalysisData(url);
+        mockAnalysis.dataSource = "Educational Simulation (Fallback)";
+        mockAnalysis.isRealData = false;
+        setAnalysisData(mockAnalysis);
+      }, 1000);
+    } finally {
       setIsAnalyzing(false);
-    }, 2000);
+    }
   };
 
   const executePoison = async () => {
