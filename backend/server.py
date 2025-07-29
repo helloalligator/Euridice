@@ -370,7 +370,65 @@ privacy_analyzer = PrivacyAnalyzer()
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Euridice - Digital Spellbook for Algorithmic Resistance"}
+
+@api_router.post("/analyze", response_model=AnalysisResponse)
+async def analyze_website(request: AnalysisRequest):
+    try:
+        # Store analysis request for transparency
+        analysis_record = {
+            "url": request.url,
+            "timestamp": datetime.utcnow(),
+            "options": request.options.dict(),
+            "user_consent": True
+        }
+        await db.analysis_requests.insert_one(analysis_record)
+        
+        # Perform analysis
+        result = await privacy_analyzer.analyze_website(request.url, request.options)
+        
+        # Store results (without personal data)
+        result_record = result.dict()
+        result_record["_id"] = str(uuid.uuid4())
+        await db.analysis_results.insert_one(result_record)
+        
+        return result
+        
+    except Exception as e:
+        logger.error(f"Analysis failed for {request.url}: {e}")
+        raise HTTPException(status_code=500, detail="Analysis failed")
+
+@api_router.post("/poison")
+async def execute_poison(request: PoisonRequest):
+    try:
+        # Simulate cookie poisoning process
+        poisoned_count = len(request.targetCookies) if request.targetCookies else 5
+        
+        # Store poisoning action for transparency
+        poison_record = {
+            "url": request.url,
+            "domain": request.domain,
+            "timestamp": datetime.utcnow(),
+            "poisonLevel": request.poisonLevel,
+            "cookiesPoisoned": poisoned_count
+        }
+        await db.poison_actions.insert_one(poison_record)
+        
+        # Generate poetic disruption keywords
+        disruption_keywords = privacy_analyzer.poetic_keywords[:poisoned_count]
+        
+        return {
+            "success": True,
+            "poisonedCookies": poisoned_count,
+            "disruptionKeywords": disruption_keywords,
+            "message": "Digital fingerprint scrambled with poetic chaos",
+            "timestamp": datetime.utcnow().isoformat(),
+            "environmentalImpact": "Minimal - local data manipulation only"
+        }
+        
+    except Exception as e:
+        logger.error(f"Cookie poisoning failed: {e}")
+        raise HTTPException(status_code=500, detail="Poisoning ritual failed")
 
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
