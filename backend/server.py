@@ -34,6 +34,69 @@ api_router = APIRouter(prefix="/api")
 
 
 # Define Models
+class AnalysisOptions(BaseModel):
+    includeBrowserCookies: bool = False
+    includeWebScraping: bool = False
+    includeFingerprinting: bool = True
+    includeEnvironmentalMetrics: bool = True
+
+class AnalysisRequest(BaseModel):
+    url: str
+    options: AnalysisOptions
+
+class Cookie(BaseModel):
+    name: str
+    type: str
+    purpose: str
+    domain: str
+    expiry: str
+    critique: Optional[str] = None
+    isReal: bool = True
+
+class FingerprintingMethod(BaseModel):
+    technique: str
+    detected: bool
+    description: str
+    dataCollected: str
+    resistance: Optional[str] = None
+
+class ThirdParty(BaseModel):
+    domain: str
+    category: str
+    purpose: str
+    requests: int
+    dataShared: str
+    critique: Optional[str] = None
+
+class EnvironmentalImpact(BaseModel):
+    carbonFootprint: str
+    dataTransfer: str
+    energyUsed: str
+    serverRequests: int
+    message: str
+
+class AnalysisResponse(BaseModel):
+    url: str
+    domain: str
+    threatLevel: str
+    threatDescription: str
+    cookieCount: int
+    fingerprintingScore: int
+    analysisTimestamp: str
+    dataSource: str
+    isRealData: bool
+    poeticKeyword: str
+    cookies: List[Cookie]
+    fingerprinting: List[FingerprintingMethod]
+    thirdParties: List[ThirdParty]
+    environmentalImpact: EnvironmentalImpact
+
+class PoisonRequest(BaseModel):
+    url: str
+    domain: str
+    poisonLevel: str = "aggressive"
+    targetCookies: List[str] = []
+
 class StatusCheck(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     client_name: str
