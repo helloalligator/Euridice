@@ -145,16 +145,16 @@ const PrivacyAnalyzer = () => {
           <Tabs defaultValue="overview" className="mb-8">
             <TabsList className={`grid w-full grid-cols-4 ${isAccessible ? "bg-gray-100" : "bg-gray-800 pixel-border"}`}>
               <TabsTrigger value="overview" className={isAccessible ? "" : "text-cyan-400"}>
-                Overview
+                Surveillance Map
               </TabsTrigger>
               <TabsTrigger value="cookies" className={isAccessible ? "" : "text-pink-400"}>
-                Cookies
+                Tracking Scripts
               </TabsTrigger>
               <TabsTrigger value="fingerprinting" className={isAccessible ? "" : "text-yellow-400"}>
-                Fingerprinting
+                Identity Extraction
               </TabsTrigger>
               <TabsTrigger value="network" className={isAccessible ? "" : "text-green-400"}>
-                Network
+                Corporate Networks
               </TabsTrigger>
             </TabsList>
 
