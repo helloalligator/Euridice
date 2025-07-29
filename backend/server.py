@@ -105,6 +105,268 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+# Tracking Analysis Functions
+class PrivacyAnalyzer:
+    def __init__(self):
+        self.known_trackers = {
+            'google-analytics.com': {'type': 'behavioral tracking', 'category': 'surveillance capitalism'},
+            'googletagmanager.com': {'type': 'tag management', 'category': 'data collection'},
+            'facebook.com': {'type': 'advertising surveillance', 'category': 'social surveillance'},
+            'doubleclick.net': {'type': 'cross-site tracking', 'category': 'attention economy'},
+            'hotjar.com': {'type': 'behavioral monitoring', 'category': 'intimate surveillance'},
+            'mixpanel.com': {'type': 'event tracking', 'category': 'behavioral analysis'},
+            'amplitude.com': {'type': 'user analytics', 'category': 'behavioral profiling'}
+        }
+        
+        self.fingerprinting_scripts = [
+            'canvas', 'webgl', 'audio', 'font', 'screen', 'battery', 'webrtc', 'timezone'
+        ]
+        
+        self.poetic_keywords = [
+            "liberation", "moon", "wildflowers", "disruption", "enchantment", 
+            "sisterhood", "fragment", "rupture", "solitude", "sacred"
+        ]
+
+    async def analyze_website(self, url: str, options: AnalysisOptions) -> AnalysisResponse:
+        start_time = time.time()
+        domain = urlparse(url).netloc
+        
+        # Initialize environmental tracking
+        server_requests = 0
+        data_transferred = 0
+        
+        # Real data collection
+        cookies = []
+        fingerprinting_methods = []
+        third_parties = []
+        
+        if options.includeWebScraping:
+            # Fetch website content
+            try:
+                async with aiohttp.ClientSession() as session:
+                    async with session.get(url, timeout=aiohttp.ClientTimeout(total=10)) as response:
+                        server_requests += 1
+                        content = await response.text()
+                        data_transferred += len(content.encode('utf-8'))
+                        
+                        # Analyze cookies from response headers
+                        if 'set-cookie' in response.headers:
+                            cookies.extend(self._parse_cookies(response.headers.getall('set-cookie'), domain))
+                        
+                        # Analyze scripts for tracking and fingerprinting
+                        fingerprinting_methods.extend(self._analyze_fingerprinting(content))
+                        third_parties.extend(self._analyze_third_parties(content))
+                        
+            except Exception as e:
+                logger.warning(f"Web scraping failed for {url}: {e}")
+        
+        # If no real data collected, use educational examples
+        if not cookies and not fingerprinting_methods:
+            cookies = self._get_educational_cookies(domain)
+            fingerprinting_methods = self._get_educational_fingerprinting()
+            third_parties = self._get_educational_third_parties(domain)
+            data_source = "Educational Simulation (No live data available)"
+            is_real_data = False
+        else:
+            data_source = "Live Website Analysis"
+            is_real_data = True
+        
+        # Calculate environmental impact
+        processing_time = time.time() - start_time
+        carbon_footprint = self._calculate_carbon_footprint(data_transferred, processing_time, server_requests)
+        
+        environmental_impact = EnvironmentalImpact(
+            carbonFootprint=f"{carbon_footprint:.2f}g CO₂",
+            dataTransfer=f"{data_transferred / 1024:.1f} KB" if data_transferred > 0 else "0 KB",
+            energyUsed=f"{processing_time * 0.5:.2f} Wh",
+            serverRequests=server_requests,
+            message=f"Analysis completed in {processing_time:.2f}s with minimal environmental impact" if server_requests > 0 else "No environmental impact - using cached educational data"
+        )
+        
+        # Generate analysis metrics
+        threat_level = "HIGH" if len(cookies) > 10 or any(fp.detected for fp in fingerprinting_methods) else "MEDIUM"
+        fingerprinting_score = min(100, len([fp for fp in fingerprinting_methods if fp.detected]) * 15 + 40)
+        
+        return AnalysisResponse(
+            url=url,
+            domain=domain,
+            threatLevel=threat_level,
+            threatDescription="Extensive algorithmic profiling apparatus detected" if threat_level == "HIGH" else "Moderate surveillance infrastructure present",
+            cookieCount=len(cookies),
+            fingerprintingScore=fingerprinting_score,
+            analysisTimestamp=datetime.utcnow().isoformat(),
+            dataSource=data_source,
+            isRealData=is_real_data,
+            poeticKeyword=self.poetic_keywords[hash(url) % len(self.poetic_keywords)],
+            cookies=cookies,
+            fingerprinting=fingerprinting_methods,
+            thirdParties=third_parties,
+            environmentalImpact=environmental_impact
+        )
+
+    def _parse_cookies(self, cookie_headers: List[str], domain: str) -> List[Cookie]:
+        cookies = []
+        for header in cookie_headers:
+            # Basic cookie parsing
+            parts = header.split(';')
+            if parts:
+                name_value = parts[0].strip().split('=', 1)
+                if len(name_value) == 2:
+                    name, _ = name_value
+                    cookie_info = self._analyze_cookie_purpose(name, domain)
+                    cookies.append(Cookie(
+                        name=name,
+                        type=cookie_info['type'],
+                        purpose=cookie_info['purpose'],
+                        domain=domain,
+                        expiry=self._extract_expiry(header),
+                        critique=cookie_info.get('critique'),
+                        isReal=True
+                    ))
+        return cookies
+
+    def _analyze_cookie_purpose(self, name: str, domain: str) -> Dict[str, str]:
+        # Analyze cookie based on common patterns
+        if '_ga' in name or 'analytics' in name.lower():
+            return {
+                'type': 'behavioral tracking',
+                'purpose': 'Google Analytics - constructs behavioral profiles across digital spaces',
+                'critique': 'Creates persistent identity markers for surveillance capitalism'
+            }
+        elif '_fb' in name or 'facebook' in name.lower():
+            return {
+                'type': 'advertising surveillance',
+                'purpose': 'Facebook tracking - builds psychographic profiles for manipulation',
+                'critique': 'Enables cross-platform behavioral modification and social control'
+            }
+        elif 'doubleclick' in name.lower():
+            return {
+                'type': 'cross-site tracking',
+                'purpose': 'Google DoubleClick - omnipresent user identification',
+                'critique': 'Creates persistent shadow profiles across the web'
+            }
+        else:
+            return {
+                'type': 'unknown tracking',
+                'purpose': f'Unclassified tracking cookie from {domain}',
+                'critique': 'Purpose unclear - potential privacy violation'
+            }
+
+    def _extract_expiry(self, cookie_header: str) -> str:
+        # Extract expiry from cookie header
+        if 'max-age' in cookie_header.lower():
+            return 'Session-based'
+        elif 'expires' in cookie_header.lower():
+            return 'Long-term'
+        return 'Session'
+
+    def _analyze_fingerprinting(self, content: str) -> List[FingerprintingMethod]:
+        methods = []
+        content_lower = content.lower()
+        
+        fingerprinting_checks = [
+            ('canvas', 'Canvas Fingerprinting', 'Invisible images reveal unique hardware signatures'),
+            ('webgl', 'WebGL Fingerprinting', '3D graphics capabilities create hardware-specific identity'),
+            ('audiocont', 'Audio Context Fingerprinting', 'Audio hardware creates unique acoustic signatures'),
+            ('getfonts', 'Font Enumeration', 'Installed fonts reveal cultural and professional background'),
+            ('webrtc', 'WebRTC IP Leakage', 'Communication protocols expose real location'),
+            ('battery', 'Battery Status Exposure', 'Power levels enable device tracking')
+        ]
+        
+        for pattern, technique, description in fingerprinting_checks:
+            detected = pattern in content_lower
+            methods.append(FingerprintingMethod(
+                technique=technique,
+                detected=detected,
+                description=description + "—a form of digital DNA extraction" if detected else description,
+                dataCollected=f"{technique.split()[0].lower()} characteristics and patterns",
+                resistance=f"Use browser extensions to spoof {technique.split()[0].lower()} data" if detected else None
+            ))
+        
+        return methods
+
+    def _analyze_third_parties(self, content: str) -> List[ThirdParty]:
+        parties = []
+        
+        # Look for common third-party domains in the content
+        for domain, info in self.known_trackers.items():
+            if domain in content:
+                parties.append(ThirdParty(
+                    domain=domain,
+                    category=info['category'],
+                    purpose=f"Detected {info['type']} scripts and trackers",
+                    requests=content.count(domain),
+                    dataShared="Behavioral patterns, device information, interaction data",
+                    critique=f"Commodifies human attention and agency for {info['category']}"
+                ))
+        
+        return parties
+
+    def _calculate_carbon_footprint(self, data_bytes: int, processing_time: float, requests: int) -> float:
+        # Simplified carbon footprint calculation
+        # Based on: data transfer + processing + server requests
+        data_carbon = (data_bytes / 1024 / 1024) * 0.5  # 0.5g CO2 per MB
+        processing_carbon = processing_time * 0.1  # 0.1g CO2 per second
+        request_carbon = requests * 0.1  # 0.1g CO2 per request
+        
+        return data_carbon + processing_carbon + request_carbon
+
+    def _get_educational_cookies(self, domain: str) -> List[Cookie]:
+        # Educational examples when real data isn't available
+        return [
+            Cookie(
+                name="_ga",
+                type="behavioral tracking",
+                purpose="Google Analytics - constructs behavioral profiles across digital spaces",
+                domain="google-analytics.com",
+                expiry="2 years",
+                critique="Creates persistent identity markers for surveillance capitalism",
+                isReal=False
+            ),
+            Cookie(
+                name="_fbp",
+                type="advertising surveillance",
+                purpose="Facebook Pixel - builds psychographic profiles for targeted manipulation",
+                domain="facebook.com",
+                expiry="90 days",
+                critique="Enables cross-platform behavioral modification and social control",
+                isReal=False
+            )
+        ]
+
+    def _get_educational_fingerprinting(self) -> List[FingerprintingMethod]:
+        return [
+            FingerprintingMethod(
+                technique="Canvas Fingerprinting",
+                detected=True,
+                description="Invisible images reveal unique hardware signatures—a form of digital DNA extraction",
+                dataCollected="GPU characteristics and rendering patterns",
+                resistance="Use canvas spoofing browser extensions"
+            ),
+            FingerprintingMethod(
+                technique="Audio Context Fingerprinting",
+                detected=True,
+                description="Audio hardware creates unique acoustic signatures—even silence betrays identity",
+                dataCollected="Audio processing characteristics and hardware details",
+                resistance="Use audio spoofing or disable audio context APIs"
+            )
+        ]
+
+    def _get_educational_third_parties(self, domain: str) -> List[ThirdParty]:
+        return [
+            ThirdParty(
+                domain="google-analytics.com",
+                category="surveillance capitalism",
+                purpose="Educational example: Behavioral tracking and user profiling",
+                requests=5,
+                dataShared="Behavioral patterns, emotional states, vulnerability markers",
+                critique="Commodifies human attention and reduces agency to algorithmic manipulation"
+            )
+        ]
+
+# Initialize analyzer
+privacy_analyzer = PrivacyAnalyzer()
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
