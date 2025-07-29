@@ -203,7 +203,7 @@ const PrivacyAnalyzer = () => {
                   <CardHeader className="pb-2">
                     <CardTitle className={`text-lg flex items-center gap-2 ${isAccessible ? "text-gray-900" : "text-cyan-400"}`}>
                       <Fingerprint className="w-5 h-5" />
-                      Fingerprinting
+                      Algorithmic Shadow
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -211,7 +211,10 @@ const PrivacyAnalyzer = () => {
                       {analysisData.fingerprintingScore}%
                     </div>
                     <p className={`text-sm mt-2 ${isAccessible ? "text-gray-600" : "text-gray-400"}`}>
-                      Identity exposure risk
+                      Identity extraction vulnerability
+                    </p>
+                    <p className={`text-xs mt-1 italic ${isAccessible ? "text-gray-500" : "text-purple-300"}`}>
+                      Injected keyword: "{analysisData.poeticKeyword}"
                     </p>
                   </CardContent>
                 </Card>
