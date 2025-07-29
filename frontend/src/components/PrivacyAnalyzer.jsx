@@ -119,7 +119,7 @@ const PrivacyAnalyzer = () => {
           <CardContent>
             <div className="flex gap-4">
               <Input
-                placeholder="https://example.com - Enter the website you're browsing"
+                placeholder="https://example.com - Cast your gaze upon the digital realm..."
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 className={`flex-1 ${isAccessible ? "border-gray-300" : "bg-black border-cyan-500 text-cyan-400 pixel-border"}`}
@@ -132,12 +132,12 @@ const PrivacyAnalyzer = () => {
                 {isAnalyzing ? (
                   <>
                     <Brain className="w-4 h-4 mr-2 animate-spin" />
-                    Analyzing...
+                    Divining...
                   </>
                 ) : (
                   <>
                     <Eye className="w-4 h-4 mr-2" />
-                    Expose Tracking
+                    Reveal the Unseen
                   </>
                 )}
               </Button>
