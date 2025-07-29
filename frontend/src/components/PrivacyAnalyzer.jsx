@@ -353,7 +353,7 @@ const PrivacyAnalyzer = () => {
                       className={`h-3 ${isAccessible ? "" : "pixel-border"}`}
                     />
                     <p className={`text-sm ${isAccessible ? "text-gray-600" : "text-purple-300 glitch-text"}`}>
-                      Injecting chaos into surveillance systems... {poisonProgress}%
+                      Weaving digital chaos into surveillance networks... {poisonProgress}%
                     </p>
                   </div>
                 )}
