@@ -358,14 +358,7 @@ const PrivacyAnalyzer = () => {
 
                 <div className="flex gap-3">
                   <Button 
-                    onClick={async () => {
-                      setConsentGiven(true);
-                      setShowConsent(false);
-                      // Use setTimeout to ensure state updates are processed
-                      setTimeout(() => {
-                        analyzeUrl();
-                      }, 100);
-                    }}
+                    onClick={executeAnalysisWithConsent}
                     className={`flex-1 ${isAccessible ? "bg-blue-600 hover:bg-blue-700" : "bg-purple-600 hover:bg-purple-700 sparkle"}`}
                   >
                     <Shield className="w-4 h-4 mr-2" />
