@@ -283,13 +283,20 @@ const PrivacyAnalyzer = () => {
                             {method.detected ? 'DETECTED' : 'CLEAN'}
                           </Badge>
                         </div>
-                        <p className={`text-sm ${isAccessible ? "text-gray-600" : "text-gray-400"}`}>
+                        <p className={`text-sm ${isAccessible ? "text-gray-600" : "text-gray-400"} mb-2`}>
                           {method.description}
                         </p>
                         {method.detected && (
-                          <p className={`text-xs mt-2 ${isAccessible ? "text-red-600" : "text-red-400"}`}>
-                            ⚠️ Your {method.dataCollected} is being harvested
-                          </p>
+                          <>
+                            <p className={`text-xs mt-2 ${isAccessible ? "text-red-600" : "text-red-400"} mb-2`}>
+                              ⚠️ Extracting: {method.dataCollected}
+                            </p>
+                            {method.resistance && (
+                              <p className={`text-xs italic ${isAccessible ? "text-blue-600" : "text-cyan-400"} border-l-2 ${isAccessible ? "border-blue-300" : "border-cyan-500"} pl-2`}>
+                                <strong>Resistance Strategy:</strong> {method.resistance}
+                              </p>
+                            )}
+                          </>
                         )}
                       </div>
                     ))}
