@@ -336,7 +336,7 @@ const PrivacyAnalyzer = () => {
             <CardHeader>
               <CardTitle className={`flex items-center gap-2 ${isAccessible ? "text-gray-900" : "text-purple-400 glitch-text"}`}>
                 <Zap className="w-6 h-6" />
-                Cookie Poisoning Ritual
+                Poetic Disruption Spell
               </CardTitle>
             </CardHeader>
             <CardContent>
