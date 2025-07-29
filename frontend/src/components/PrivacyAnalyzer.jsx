@@ -324,7 +324,78 @@ const PrivacyAnalyzer = () => {
 
         {/* Analysis Results */}
         {analysisData && (
-          <Tabs defaultValue="overview" className="mb-8">
+          <>
+            {/* Data Source Transparency */}
+            <Card className={`mb-4 ${isAccessible ? "bg-white border-gray-200" : "bg-gray-900 border-cyan-500 pixel-border"}`}>
+              <CardContent className="pt-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Database className={`w-5 h-5 ${isAccessible ? "text-blue-600" : "text-cyan-400"}`} />
+                    <span className={`text-sm font-medium ${isAccessible ? "text-gray-900" : "text-cyan-400"}`}>
+                      Data Source: {analysisData.dataSource || "Educational Simulation"}
+                    </span>
+                    <Badge variant={analysisData.isRealData ? "destructive" : "secondary"}>
+                      {analysisData.isRealData ? "LIVE DATA" : "SIMULATION"}
+                    </Badge>
+                  </div>
+                  {environmentalImpact && (
+                    <div className="flex items-center gap-2">
+                      <Leaf className={`w-4 h-4 ${isAccessible ? "text-green-600" : "text-green-400"}`} />
+                      <span className={`text-xs ${isAccessible ? "text-gray-600" : "text-gray-400"}`}>
+                        {environmentalImpact.carbonFootprint}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Environmental Impact Metrics */}
+            {environmentalImpact && analysisData.isRealData && (
+              <Card className={`mb-6 ${isAccessible ? "bg-white border-gray-200" : "bg-gray-900 border-green-500 pixel-border"}`}>
+                <CardHeader>
+                  <CardTitle className={`flex items-center gap-2 ${isAccessible ? "text-gray-900" : "text-green-400"}`}>
+                    <Leaf className="w-6 h-6" />
+                    Environmental Impact Assessment
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className={`p-3 rounded-lg ${isAccessible ? "bg-gray-50" : "bg-black/30"}`}>
+                      <p className={`text-xs ${isAccessible ? "text-gray-600" : "text-gray-400"}`}>Carbon Footprint</p>
+                      <p className={`text-lg font-semibold ${isAccessible ? "text-gray-900" : "text-green-400"}`}>
+                        {environmentalImpact.carbonFootprint}
+                      </p>
+                    </div>
+                    <div className={`p-3 rounded-lg ${isAccessible ? "bg-gray-50" : "bg-black/30"}`}>
+                      <p className={`text-xs ${isAccessible ? "text-gray-600" : "text-gray-400"}`}>Data Transfer</p>
+                      <p className={`text-lg font-semibold ${isAccessible ? "text-gray-900" : "text-green-400"}`}>
+                        {environmentalImpact.dataTransfer}
+                      </p>
+                    </div>
+                    <div className={`p-3 rounded-lg ${isAccessible ? "bg-gray-50" : "bg-black/30"}`}>
+                      <p className={`text-xs ${isAccessible ? "text-gray-600" : "text-gray-400"}`}>Energy Used</p>
+                      <p className={`text-lg font-semibold ${isAccessible ? "text-gray-900" : "text-green-400"}`}>
+                        {environmentalImpact.energyUsed}
+                      </p>
+                    </div>
+                    <div className={`p-3 rounded-lg ${isAccessible ? "bg-gray-50" : "bg-black/30"}`}>
+                      <p className={`text-xs ${isAccessible ? "text-gray-600" : "text-gray-400"}`}>Server Requests</p>
+                      <p className={`text-lg font-semibold ${isAccessible ? "text-gray-900" : "text-green-400"}`}>
+                        {environmentalImpact.serverRequests}
+                      </p>
+                    </div>
+                  </div>
+                  {environmentalImpact.message && (
+                    <p className={`text-sm mt-3 italic ${isAccessible ? "text-gray-600" : "text-green-300"}`}>
+                      {environmentalImpact.message}
+                    </p>
+                  )}
+                </CardContent>
+              </Card>
+            )}
+
+            <Tabs defaultValue="overview" className="mb-8">
             <TabsList className={`grid w-full grid-cols-4 ${isAccessible ? "bg-gray-100" : "bg-gray-800 pixel-border"}`}>
               <TabsTrigger value="overview" className={isAccessible ? "" : "text-cyan-400"}>
                 Surveillance Map
