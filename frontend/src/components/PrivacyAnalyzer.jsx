@@ -321,16 +321,21 @@ const PrivacyAnalyzer = () => {
                           <h4 className={`font-semibold ${isAccessible ? "text-gray-900" : "text-green-400"}`}>
                             {party.domain}
                           </h4>
-                          <Badge variant={party.category === 'advertising' ? 'destructive' : 'secondary'}>
+                          <Badge variant={party.category.includes('surveillance') || party.category.includes('capitalism') ? 'destructive' : 'secondary'}>
                             {party.category}
                           </Badge>
                         </div>
-                        <p className={`text-sm ${isAccessible ? "text-gray-600" : "text-gray-400"}`}>
+                        <p className={`text-sm ${isAccessible ? "text-gray-600" : "text-gray-400"} mb-2`}>
                           {party.purpose}
                         </p>
-                        <p className={`text-xs mt-1 ${isAccessible ? "text-gray-500" : "text-gray-500"}`}>
-                          Requests: {party.requests} • Data shared: {party.dataShared}
+                        <p className={`text-xs ${isAccessible ? "text-gray-500" : "text-gray-500"} mb-2`}>
+                          Requests: {party.requests} • Data harvested: {party.dataShared}
                         </p>
+                        {party.critique && (
+                          <p className={`text-xs italic ${isAccessible ? "text-red-600" : "text-red-400"} border-l-2 ${isAccessible ? "border-red-300" : "border-red-500"} pl-2`}>
+                            <strong>Feminist Critique:</strong> {party.critique}
+                          </p>
+                        )}
                       </div>
                     ))}
                   </div>
