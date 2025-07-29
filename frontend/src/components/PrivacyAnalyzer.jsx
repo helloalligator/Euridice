@@ -113,7 +113,7 @@ const PrivacyAnalyzer = () => {
           <CardHeader>
             <CardTitle className={`flex items-center gap-2 ${isAccessible ? "text-gray-900" : "text-cyan-400"}`}>
               <Target className="w-6 h-6" />
-              Target Website Analysis
+              Peer Into the Algorithmic Veil
             </CardTitle>
           </CardHeader>
           <CardContent>
