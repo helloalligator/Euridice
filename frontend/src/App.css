@@ -1,34 +1,122 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap');
+
+.glitch-text {
+  font-family: 'Orbitron', monospace;
+  animation: glitch 2s infinite;
+  text-shadow: 
+    0.05em 0 0 #ff006b,
+    -0.05em -0.025em 0 #00ffff,
+    0.025em 0.05em 0 #ffff00;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+.glitch-bg {
+  background: linear-gradient(45deg, 
+    #ff006b11 0%, 
+    #00ffff11 25%, 
+    #ffff0011 50%, 
+    #ff006b11 75%, 
+    #00ffff11 100%);
+  animation: bg-shift 3s ease-in-out infinite;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+.sparkle {
+  position: relative;
+  overflow: hidden;
 }
 
-.App-link {
-    color: #61dafb;
+.sparkle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 0, 107, 0.4), 
+    transparent);
+  animation: sparkle-sweep 2s infinite;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.pixel-border {
+  border: 3px solid;
+  border-image: linear-gradient(45deg, #ff006b, #00ffff, #ffff00) 1;
+  box-shadow: 
+    0 0 10px rgba(255, 0, 107, 0.5),
+    inset 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.retro-scan {
+  position: relative;
+  overflow: hidden;
+}
+
+.retro-scan::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(transparent 50%, rgba(0, 255, 255, 0.03) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  animation: scan-lines 0.1s linear infinite;
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  10% { transform: translate(-2px, 2px); }
+  20% { transform: translate(-2px, -2px); }
+  30% { transform: translate(2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  50% { transform: translate(-2px, 2px); }
+  60% { transform: translate(-2px, -2px); }
+  70% { transform: translate(2px, 2px); }
+  80% { transform: translate(-2px, -2px); }
+  90% { transform: translate(2px, 2px); }
+}
+
+@keyframes bg-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes sparkle-sweep {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes scan-lines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(4px); }
+}
+
+.accessibility-mode {
+  font-family: 'Inter', sans-serif !important;
+}
+
+.accessibility-mode .glitch-text {
+  animation: none !important;
+  text-shadow: none !important;
+  color: #1f2937 !important;
+}
+
+.accessibility-mode .glitch-bg {
+  background: #f9fafb !important;
+  animation: none !important;
+}
+
+.accessibility-mode .sparkle::before {
+  display: none !important;
+}
+
+.accessibility-mode .pixel-border {
+  border: 1px solid #d1d5db !important;
+  border-image: none !important;
+  box-shadow: none !important;
+}
+
+.accessibility-mode .retro-scan::after {
+  display: none !important;
 }
