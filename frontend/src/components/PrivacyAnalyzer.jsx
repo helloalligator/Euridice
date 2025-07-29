@@ -7,6 +7,7 @@ import { Badge } from "./ui/badge";
 import { Progress } from "./ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Alert, AlertDescription } from "./ui/alert";
+import { Checkbox } from "./ui/checkbox";
 import { useToast } from "../hooks/use-toast";
 import { 
   Eye, 
@@ -18,7 +19,12 @@ import {
   AlertTriangle,
   Sparkles,
   Brain,
-  Target
+  Target,
+  Leaf,
+  Database,
+  Globe,
+  Lock,
+  Info
 } from "lucide-react";
 import mockData from "../utils/mockData";
 
