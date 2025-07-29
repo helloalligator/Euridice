@@ -230,7 +230,7 @@ const PrivacyAnalyzer = () => {
                 <CardHeader>
                   <CardTitle className={`flex items-center gap-2 ${isAccessible ? "text-gray-900" : "text-pink-400"}`}>
                     <Cookie className="w-6 h-6" />
-                    Cookie Analysis
+                    Surveillance Scripts Analysis
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
