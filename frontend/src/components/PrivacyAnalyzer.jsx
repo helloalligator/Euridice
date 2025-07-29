@@ -384,12 +384,16 @@ const PrivacyAnalyzer = () => {
         {/* Educational Footer */}
         <div className={`text-center mt-12 p-6 rounded-lg ${isAccessible ? "bg-gray-100 text-gray-800" : "bg-gray-900/50 text-cyan-300 glitch-bg"}`}>
           <h3 className={`text-2xl font-bold mb-4 ${isAccessible ? "" : "glitch-text"}`}>
-            The Web is Watching You
+            Defamiliarizing the Digital
           </h3>
-          <p className={`max-w-3xl mx-auto ${isAccessible ? "text-gray-600" : "text-cyan-200"}`}>
-            Your digital experience is not neutral. Every click, scroll, and pause is catalogued by 
-            the technocratic surveillance apparatus of Web 2.0. This tool exposes the invisible 
-            mechanisms that track, profile, and commodify your online existence. Knowledge is resistance.
+          <p className={`max-w-3xl mx-auto ${isAccessible ? "text-gray-600" : "text-cyan-200"} mb-4`}>
+            <em>Euridice</em> is a research-creation project grounded in feminist technoscience and design justice principles. 
+            This digital spellbook reveals the hidden mechanisms that track, profile, and commodify your online existence—making 
+            resistance more joyful and strange.
+          </p>
+          <p className={`max-w-2xl mx-auto text-sm ${isAccessible ? "text-gray-500" : "text-purple-300"} italic`}>
+            "Flow cannot be understood without interruption, nor function without glitching. This is why glitch studies is necessary." 
+            — Rosa Menkman, Glitch Studies Manifesto
           </p>
         </div>
       </div>
