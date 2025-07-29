@@ -367,12 +367,12 @@ const PrivacyAnalyzer = () => {
                   {isPoisoning ? (
                     <>
                       <Sparkles className="w-5 h-5 mr-2 animate-spin" />
-                      Casting Digital Chaos...
+                      Casting Poetic Disruption...
                     </>
                   ) : (
                     <>
                       <Shield className="w-5 h-5 mr-2" />
-                      Execute Poisoning Ritual
+                      Execute Disruption Spell
                     </>
                   )}
                 </Button>
