@@ -1,16 +1,17 @@
-# Privacy Analyzer Contracts
+# Euridice Privacy Analyzer Contracts
 
 ## API Contracts
 
-### 1. URL Analysis Endpoint
+### 1. Real-Time Analysis Endpoint
 **POST /api/analyze**
 ```json
 {
   "url": "https://example.com",
   "options": {
-    "includeCookies": true,
+    "includeBrowserCookies": false,
+    "includeWebScraping": true,
     "includeFingerprinting": true,
-    "includeNetworkAnalysis": true
+    "includeEnvironmentalMetrics": true
   }
 }
 ```
@@ -21,17 +22,27 @@
   "url": "https://example.com",
   "domain": "example.com", 
   "threatLevel": "HIGH",
-  "threatDescription": "Extensive surveillance infrastructure detected",
+  "threatDescription": "Extensive algorithmic profiling apparatus detected",
   "cookieCount": 34,
   "fingerprintingScore": 78,
   "analysisTimestamp": "2025-01-27T...",
+  "dataSource": "Live Website Analysis",
+  "isRealData": true,
+  "poeticKeyword": "liberation",
   "cookies": [...],
   "fingerprinting": [...], 
-  "thirdParties": [...]
+  "thirdParties": [...],
+  "environmentalImpact": {
+    "carbonFootprint": "2.34g CO₂",
+    "dataTransfer": "1.2 MB",
+    "energyUsed": "0.45 Wh",
+    "serverRequests": 3,
+    "message": "Analysis completed with minimal environmental impact"
+  }
 }
 ```
 
-### 2. Cookie Poisoning Endpoint
+### 2. Poetic Disruption Endpoint
 **POST /api/poison**
 ```json
 {
@@ -47,66 +58,73 @@
 {
   "success": true,
   "poisonedCookies": 12,
-  "message": "Digital fingerprint scrambled successfully",
-  "timestamp": "2025-01-27T..."
+  "disruptionKeywords": ["moon", "wildflowers", "disruption"],
+  "message": "Digital fingerprint scrambled with poetic chaos",
+  "timestamp": "2025-01-27T...",
+  "environmentalImpact": "Minimal - local data manipulation only"
 }
 ```
 
-## Mock Data Replacement Plan
+## Data Transparency & User Consent
 
-### Frontend Mock Data (mockData.js)
-Currently mocking:
-- `getAnalysisData(url)` - Returns fake tracking analysis
-- Cookie data with predefined tracking types
-- Fingerprinting detection results
-- Third-party connection data
+### Frontend Consent Modal
+- **Educational Simulation**: Zero environmental impact, curated examples
+- **Real-Time Analysis**: Live data collection with environmental metrics
+- **User Choices**: Browser cookie access vs web scraping consent
+- **Clear Labeling**: All data sources transparently identified
 
-### Backend Implementation Required
+### Environmental Impact Tracking
+- **Carbon Footprint**: Calculated based on data transfer + processing + requests
+- **Data Transfer**: Actual bytes transferred during analysis
+- **Energy Usage**: Processing time converted to watt-hours
+- **Server Requests**: Count of HTTP requests made
 
-1. **Real URL Analysis:**
-   - Web scraping to fetch actual website content
-   - Cookie extraction and classification  
-   - JavaScript analysis for fingerprinting scripts
-   - Network request monitoring for third-party trackers
+### Data Source Indicators
+- **"Educational Simulation"**: Mock data for demonstration
+- **"Live Website Analysis"**: Real-time scraping and analysis
+- **"SIMULATION" vs "LIVE DATA"** badges for clear identification
 
-2. **Privacy Scoring Algorithm:**
-   - Cookie risk assessment based on domains/purposes
-   - Fingerprinting technique detection
-   - Threat level calculation
-   - Privacy violation categorization
+## Real Implementation Features
 
-3. **Cookie Poisoning Implementation:**
-   - Generate realistic but false user data
-   - Cookie value scrambling algorithms
-   - Noise injection into tracking parameters
-   - Session data corruption methods
+### Actual Cookie Detection
+1. **Web Scraping**: Uses aiohttp to fetch website content
+2. **Cookie Parsing**: Extracts Set-Cookie headers from responses
+3. **Purpose Analysis**: Categorizes cookies based on name patterns and domains
+4. **Critical Analysis**: Provides feminist technoscience critique of each tracker
 
-## Frontend & Backend Integration
+### Fingerprinting Detection
+1. **Script Analysis**: Scans website content for fingerprinting JavaScript
+2. **Pattern Recognition**: Detects canvas, WebGL, audio, font enumeration attempts
+3. **Resistance Strategies**: Provides specific countermeasures for each technique
+4. **Educational Context**: Explains the surveillance implications
 
-### Remove Mock Data:
-1. Replace `mockData.getAnalysisData()` calls with actual API calls to `/api/analyze`
-2. Replace poisoning simulation with real `/api/poison` endpoint calls
-3. Add proper error handling for API failures
-4. Implement loading states during real analysis
+### Third-Party Tracking
+1. **Domain Detection**: Identifies known tracking domains in website content
+2. **Request Counting**: Measures frequency of third-party connections
+3. **Categorization**: Labels trackers by surveillance capitalism categories
+4. **Feminist Critique**: Explains how each tracker exploits human vulnerabilities
 
-### API Integration Points:
-- `analyzeUrl()` function → POST to `/api/analyze`
-- `executePoison()` function → POST to `/api/poison`  
-- Add authentication/rate limiting for production use
-- Implement caching for repeated URL analysis
+## Environmental Responsibility
 
-## Technical Implementation Notes
+### Carbon Footprint Calculation
+- **Data Transfer Impact**: 0.5g CO₂ per MB transferred
+- **Processing Impact**: 0.1g CO₂ per second of analysis
+- **Request Impact**: 0.1g CO₂ per HTTP request made
 
-### Backend Requirements:
-- Web scraping library (BeautifulSoup/Scrapy)
-- Cookie parsing and analysis
-- JavaScript AST parsing for fingerprinting detection
-- Network request simulation and monitoring
-- Privacy databases/blocklists for tracker identification
+### User Education
+- Clear environmental cost display for real-time analysis
+- Encouragement to use educational mode when possible
+- Transparency about resource consumption
 
-### Security Considerations:
-- Input validation for URLs
-- Rate limiting to prevent abuse
-- Secure cookie manipulation 
-- User consent for poisoning actions
-- Data privacy compliance
+## Academic Integrity & Transparency
+
+### Data Storage
+- Analysis requests logged with timestamps and consent status
+- Results stored without personal identifiable information
+- Poisoning actions recorded for research transparency
+
+### Research Ethics
+- No permanent data retention of personal information
+- Clear consent process for all data collection
+- Educational alternatives always available
+- Environmental impact fully disclosed
