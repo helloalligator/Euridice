@@ -221,8 +221,8 @@ const PrivacyAnalyzer = () => {
               <Alert className={`mt-6 ${isAccessible ? "border-orange-200 bg-orange-50" : "border-yellow-500 bg-yellow-500/10 pixel-border"}`}>
                 <AlertTriangle className={`h-4 w-4 ${isAccessible ? "text-orange-600" : "text-yellow-400"}`} />
                 <AlertDescription className={isAccessible ? "text-orange-800" : "text-yellow-200"}>
-                  <strong>Web 2.0 Surveillance Detected:</strong> This website is actively profiling your digital behavior. 
-                  Your browsing experience is not neutral - you are the product being sold to advertisers.
+                  <strong>Algorithmic Surveillance Detected:</strong> This website actively profiles your digital behavior through technocratic mechanisms. 
+                  Your browsing experience is not neutral—become aware to enable agency amid technofascism.
                 </AlertDescription>
               </Alert>
             </TabsContent>
