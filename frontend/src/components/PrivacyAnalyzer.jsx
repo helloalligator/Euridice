@@ -35,6 +35,12 @@ const PrivacyAnalyzer = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [poisonProgress, setPoisonProgress] = useState(0);
   const [isPoisoning, setIsPoisoning] = useState(false);
+  const [showConsent, setShowConsent] = useState(false);
+  const [consentGiven, setConsentGiven] = useState(false);
+  const [useRealData, setUseRealData] = useState(false);
+  const [browserCookiesConsent, setBrowserCookiesConsent] = useState(false);
+  const [webScrapingConsent, setWebScrapingConsent] = useState(false);
+  const [environmentalImpact, setEnvironmentalImpact] = useState(null);
   const { toast } = useToast();
 
   const containerClass = isAccessible ? "accessibility-mode" : "";
