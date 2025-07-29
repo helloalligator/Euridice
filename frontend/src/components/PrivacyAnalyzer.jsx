@@ -342,8 +342,8 @@ const PrivacyAnalyzer = () => {
             <CardContent>
               <div className="space-y-4">
                 <p className={`${isAccessible ? "text-gray-600" : "text-purple-200"}`}>
-                  Scramble your digital fingerprint and inject noise into tracking systems. 
-                  This will confuse advertisers and make your data profile unreliable.
+                  Inject poetic keywords and noise into algorithmic profiling systems. 
+                  This hybrid analog-digital intervention confuses surveillance apparatuses and defamiliarizes your web experience through playful resistance.
                 </p>
                 
                 {isPoisoning && (
