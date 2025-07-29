@@ -180,6 +180,111 @@ const PrivacyAnalyzer = () => {
           </div>
         </div>
 
+        {/* Data Collection Consent Modal */}
+        {showConsent && (
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+            <Card className={`w-full max-w-2xl ${isAccessible ? "bg-white border-gray-200" : "bg-gray-900 border-purple-500 pixel-border"}`}>
+              <CardHeader>
+                <CardTitle className={`flex items-center gap-2 ${isAccessible ? "text-gray-900" : "text-purple-400 glitch-text"}`}>
+                  <Lock className="w-6 h-6" />
+                  Informed Consent for Data Collection
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className={`${isAccessible ? "text-gray-700" : "text-gray-200"}`}>
+                  <strong>Euridice</strong> can analyze websites using different methods. Please choose your preferred approach:
+                </p>
+
+                <div className={`p-4 rounded-lg ${isAccessible ? "bg-gray-50 border border-gray-200" : "bg-black/30 border border-cyan-500/30"}`}>
+                  <div className="flex items-center space-x-2 mb-2">
+                    <Checkbox 
+                      id="educational" 
+                      checked={!useRealData}
+                      onCheckedChange={() => setUseRealData(false)}
+                    />
+                    <label htmlFor="educational" className={`text-sm font-medium ${isAccessible ? "text-gray-900" : "text-cyan-400"}`}>
+                      Educational Simulation (Recommended)
+                    </label>
+                  </div>
+                  <p className={`text-xs ${isAccessible ? "text-gray-600" : "text-gray-400"} ml-6`}>
+                    Uses curated examples to demonstrate tracking mechanisms. Zero environmental impact.
+                  </p>
+                </div>
+
+                <div className={`p-4 rounded-lg ${isAccessible ? "bg-gray-50 border border-gray-200" : "bg-black/30 border border-orange-500/30"}`}>
+                  <div className="flex items-center space-x-2 mb-2">
+                    <Checkbox 
+                      id="realdata" 
+                      checked={useRealData}
+                      onCheckedChange={setUseRealData}
+                    />
+                    <label htmlFor="realdata" className={`text-sm font-medium ${isAccessible ? "text-gray-900" : "text-orange-400"}`}>
+                      Real-Time Analysis (Higher Impact)
+                    </label>
+                  </div>
+                  <p className={`text-xs ${isAccessible ? "text-gray-600" : "text-gray-400"} ml-6 mb-3`}>
+                    Analyzes actual website tracking. Higher energy consumption and carbon footprint.
+                  </p>
+
+                  {useRealData && (
+                    <div className="ml-6 space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <Checkbox 
+                          id="browser-cookies" 
+                          checked={browserCookiesConsent}
+                          onCheckedChange={setBrowserCookiesConsent}
+                        />
+                        <label htmlFor="browser-cookies" className={`text-xs ${isAccessible ? "text-gray-700" : "text-yellow-300"}`}>
+                          Access browser cookies for this URL
+                        </label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Checkbox 
+                          id="web-scraping" 
+                          checked={webScrapingConsent}
+                          onCheckedChange={setWebScrapingConsent}
+                        />
+                        <label htmlFor="web-scraping" className={`text-xs ${isAccessible ? "text-gray-700" : "text-yellow-300"}`}>
+                          Fetch and analyze website content (web scraping)
+                        </label>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <Alert className={`${isAccessible ? "border-blue-200 bg-blue-50" : "border-cyan-500 bg-cyan-500/10 pixel-border"}`}>
+                  <Info className={`h-4 w-4 ${isAccessible ? "text-blue-600" : "text-cyan-400"}`} />
+                  <AlertDescription className={isAccessible ? "text-blue-800" : "text-cyan-200"}>
+                    <strong>Transparency Promise:</strong> All data sources will be clearly labeled. No personal data is stored. 
+                    Environmental impact metrics will be displayed for real-time analysis.
+                  </AlertDescription>
+                </Alert>
+
+                <div className="flex gap-3">
+                  <Button 
+                    onClick={() => {
+                      setConsentGiven(true);
+                      setShowConsent(false);
+                      analyzeUrl();
+                    }}
+                    className={`flex-1 ${isAccessible ? "bg-blue-600 hover:bg-blue-700" : "bg-purple-600 hover:bg-purple-700 sparkle"}`}
+                  >
+                    <Shield className="w-4 h-4 mr-2" />
+                    Proceed with Analysis
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    onClick={() => setShowConsent(false)}
+                    className={`${isAccessible ? "border-gray-300" : "border-gray-600"}`}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
         {/* URL Input */}
         <Card className={`mb-8 ${isAccessible ? "bg-white border-gray-200" : "bg-gray-900 border-pink-500 pixel-border sparkle"}`}>
           <CardHeader>
