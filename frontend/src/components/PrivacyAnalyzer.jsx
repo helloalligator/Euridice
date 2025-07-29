@@ -596,6 +596,7 @@ const PrivacyAnalyzer = () => {
               </Card>
             </TabsContent>
           </Tabs>
+          </>
         )}
 
         {/* Cookie Poisoning Section */}
