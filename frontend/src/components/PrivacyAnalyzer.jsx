@@ -310,7 +310,7 @@ const PrivacyAnalyzer = () => {
                 <CardHeader>
                   <CardTitle className={`flex items-center gap-2 ${isAccessible ? "text-gray-900" : "text-green-400"}`}>
                     <Network className="w-6 h-6" />
-                    Third-Party Connections
+                    Corporate Surveillance Networks
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
