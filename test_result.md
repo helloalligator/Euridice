@@ -248,11 +248,12 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Real-Time Analysis with Backend API Integration"
-    - "Environmental Impact Assessment"
-    - "Error Handling and Fallback Mechanisms"
+    - "Fix Consent Modal Issue"
+    - "Remove Educational Simulation Mode"
+    - "Implement Real Cookie Poisoning"
+    - "Implement Real Fingerprint Obfuscation"
   stuck_tasks:
-    - "Real-Time Analysis with Backend API Integration"
+    - "Fix Consent Modal Issue"
   test_all: false
   test_priority: "stuck_first"
 
