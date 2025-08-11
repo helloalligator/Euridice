@@ -36,7 +36,7 @@ api_router = APIRouter(prefix="/api")
 # Define Models
 class AnalysisOptions(BaseModel):
     includeBrowserCookies: bool = False
-    includeWebScraping: bool = False
+    includeWebScraping: bool = True  # Default to true for real-time analysis
     includeFingerprinting: bool = True
     includeEnvironmentalMetrics: bool = True
 
