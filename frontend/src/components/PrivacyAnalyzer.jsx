@@ -234,23 +234,23 @@ const PrivacyAnalyzer = () => {
               <CardContent className="space-y-4">
                 <p className={`${isAccessible ? "text-gray-700" : "text-gray-200"}`}>
                   <strong>Euridice</strong> performs real-time analysis to reveal surveillance infrastructure. 
-                  This digital spellbook requires your informed consent to analyze websites and disrupt tracking.
+                  This requires web scraping and content analysis to expose hidden tracking mechanisms.
                 </p>
 
                 <div className={`p-4 rounded-lg ${isAccessible ? "bg-gray-50 border border-gray-200" : "bg-black/30 border border-cyan-500/30"}`}>
                   <h4 className={`text-sm font-medium mb-3 ${isAccessible ? "text-gray-900" : "text-cyan-400"}`}>
-                    Real-Time Analysis Permissions
+                    Real-Time Analysis (Always Enabled)
                   </h4>
                   
                   <div className="space-y-3">
                     <div className="flex items-center space-x-2">
-                      <Checkbox 
-                        id="web-scraping" 
-                        checked={webScrapingConsent}
-                        onCheckedChange={setWebScrapingConsent}
-                      />
-                      <label htmlFor="web-scraping" className={`text-sm ${isAccessible ? "text-gray-700" : "text-yellow-300"}`}>
-                        Fetch and analyze website content (web scraping)
+                      <div className={`w-4 h-4 rounded border ${isAccessible ? "bg-purple-600 border-purple-600" : "bg-purple-500 border-purple-500"} flex items-center justify-center`}>
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <label className={`text-sm ${isAccessible ? "text-gray-700" : "text-purple-300"}`}>
+                        Fetch and analyze website content (required for real-time analysis)
                       </label>
                     </div>
                     <div className="flex items-center space-x-2">
@@ -260,7 +260,7 @@ const PrivacyAnalyzer = () => {
                         onCheckedChange={setBrowserCookiesConsent}
                       />
                       <label htmlFor="browser-cookies" className={`text-sm ${isAccessible ? "text-gray-700" : "text-yellow-300"}`}>
-                        Analyze tracking cookies and surveillance scripts
+                        Enhanced cookie analysis (optional - uses browser cookie data)
                       </label>
                     </div>
                   </div>
