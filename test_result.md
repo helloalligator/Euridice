@@ -329,12 +329,13 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Fix Consent Modal Issue"
     - "Remove Educational Simulation Mode"
-    - "Implement Real Cookie Poisoning"
-    - "Implement Real Fingerprint Obfuscation"
+    - "Real-Time Analysis Integration"
+    - "Environmental Impact Assessment"
   stuck_tasks:
-    - "Fix Consent Modal Issue"
+    - "Remove Educational Simulation Mode"
+    - "Real-Time Analysis Integration"
+    - "Environmental Impact Assessment"
   test_all: false
   test_priority: "stuck_first"
 
