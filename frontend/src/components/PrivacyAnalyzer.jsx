@@ -37,7 +37,7 @@ const PrivacyAnalyzer = () => {
   const [isPoisoning, setIsPoisoning] = useState(false);
   const [showConsent, setShowConsent] = useState(false);
   const [consentGiven, setConsentGiven] = useState(false);
-  const [useRealData, setUseRealData] = useState(false);
+  const [useRealData, setUseRealData] = useState(true); // Always use real data now
   const [browserCookiesConsent, setBrowserCookiesConsent] = useState(false);
   const [webScrapingConsent, setWebScrapingConsent] = useState(false);
   const [environmentalImpact, setEnvironmentalImpact] = useState(null);
