@@ -38,7 +38,6 @@ const PrivacyAnalyzer = () => {
   const [consentGiven, setConsentGiven] = useState(false);
   const [useRealData, setUseRealData] = useState(true); // Always use real data now
   const [browserCookiesConsent, setBrowserCookiesConsent] = useState(false);
-  const [webScrapingConsent, setWebScrapingConsent] = useState(false);
   const [environmentalImpact, setEnvironmentalImpact] = useState(null);
   const { toast } = useToast();
 
