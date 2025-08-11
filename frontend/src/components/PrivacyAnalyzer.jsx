@@ -26,7 +26,6 @@ import {
   Lock,
   Info
 } from "lucide-react";
-import mockData from "../utils/mockData";
 
 const PrivacyAnalyzer = () => {
   const [url, setUrl] = useState("");
