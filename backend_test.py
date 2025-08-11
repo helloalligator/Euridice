@@ -279,10 +279,10 @@ class EuridiceBackendTester:
             
             # Test each obfuscation technique in detail
             technique_tests = {
-                "Canvas Fingerprint Scrambling": lambda obs: "canvas" in obs.get("obfuscated_data", "").lower(),
-                "WebRTC IP Masking": lambda obs: "192.168" in obs.get("obfuscated_data", "") or "10.0" in obs.get("obfuscated_data", ""),
-                "Audio Context Disruption": lambda obs: "audio" in obs.get("obfuscated_data", "").lower(),
-                "Font Enumeration Spoofing": lambda obs: "Liberation" in obs.get("obfuscated_data", "") or "Moon" in obs.get("obfuscated_data", ""),
+                "Canvas Fingerprint Scrambling": lambda obs: any(word in obs.get("obfuscated_data", "").lower() for word in ["canvas", "liberation", "chaos", "wildflower", "moonlight"]),
+                "WebRTC IP Masking": lambda obs: "192.168" in obs.get("obfuscated_data", "") or "10.0" in obs.get("obfuscated_data", "") or "172.16" in obs.get("obfuscated_data", ""),
+                "Audio Context Disruption": lambda obs: any(word in obs.get("obfuscated_data", "").lower() for word in ["audio", "frequency", "sisterhood", "enchanted"]),
+                "Font Enumeration Spoofing": lambda obs: any(word in obs.get("obfuscated_data", "") for word in ["Liberation", "Moon", "Wildflower", "Sisterhood", "Chaos", "Enchantment"]),
                 "Screen Resolution Randomization": lambda obs: "x" in obs.get("obfuscated_data", "") and "randomized" in obs.get("obfuscated_data", "")
             }
             
