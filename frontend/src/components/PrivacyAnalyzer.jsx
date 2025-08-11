@@ -313,7 +313,7 @@ const PrivacyAnalyzer = () => {
             </Card>
 
             {/* Environmental Impact Metrics */}
-            {environmentalImpact && analysisData.isRealData && (
+            {environmentalImpact && (
               <Card className={`mb-6 ${isAccessible ? "bg-white border-gray-200" : "bg-gray-900 border-green-500 pixel-border"}`}>
                 <CardHeader>
                   <CardTitle className={`flex items-center gap-2 ${isAccessible ? "text-gray-900" : "text-green-400"}`}>
