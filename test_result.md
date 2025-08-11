@@ -212,15 +212,18 @@ frontend:
 
   - task: "Environmental Impact Assessment"
     implemented: true
-    working: "NA"
+    working: false
     file: "/app/frontend/src/components/PrivacyAnalyzer.jsx"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: "NA"
           agent: "testing"
           comment: "Cannot test environmental impact assessment because real-time analysis flow is broken. Backend API correctly returns environmental metrics (0.12g CO₂, data transfer, energy usage, server requests) but frontend cannot reach this functionality due to consent modal issue."
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL FAILURE: Environmental Impact Assessment showing simulation data. Despite successful API calls to /api/analyze, results display '0.00g CO₂', '0 KB', '0.00 Wh', '0 Server Requests' with message 'No environmental impact - using cached educational data'. This confirms backend is returning simulation data instead of real environmental metrics from live analysis."
 
   - task: "Error Handling and Fallback Mechanisms"
     implemented: true
