@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the core Euridice analysis functionality after the bug fix"
+user_problem_statement: "Remove all simulations and replace with real-time analysis and disruptions. Implement actual cookie poisoning, fingerprint obfuscation, and data scrambling for the Disruption Spell."
 
 frontend:
   - task: "Basic Analysis Flow"
