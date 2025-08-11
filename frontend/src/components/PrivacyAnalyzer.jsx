@@ -68,6 +68,12 @@ const PrivacyAnalyzer = () => {
     setEnvironmentalImpact(null);
 
     try {
+      // Ensure URL has proper protocol
+      let formattedUrl = url;
+      if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        formattedUrl = `https://${url}`;
+      }
+      
       // Always perform real-time analysis - no simulation mode
       const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
       const response = await fetch(`${BACKEND_URL}/api/analyze`, {
@@ -76,7 +82,7 @@ const PrivacyAnalyzer = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          url,
+          url: formattedUrl,
           options: {
             includeBrowserCookies: browserCookiesConsent,
             includeWebScraping: true, // Always true for real-time analysis
