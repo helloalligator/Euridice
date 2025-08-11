@@ -181,81 +181,59 @@ const PrivacyAnalyzer = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className={`${isAccessible ? "text-gray-700" : "text-gray-200"}`}>
-                  <strong>Euridice</strong> can analyze websites using different methods. Please choose your preferred approach:
+                  <strong>Euridice</strong> performs real-time analysis to reveal surveillance infrastructure. 
+                  This digital spellbook requires your informed consent to analyze websites and disrupt tracking.
                 </p>
 
                 <div className={`p-4 rounded-lg ${isAccessible ? "bg-gray-50 border border-gray-200" : "bg-black/30 border border-cyan-500/30"}`}>
-                  <div className="flex items-center space-x-2 mb-2">
-                    <Checkbox 
-                      id="educational" 
-                      checked={!useRealData}
-                      onCheckedChange={() => setUseRealData(false)}
-                    />
-                    <label htmlFor="educational" className={`text-sm font-medium ${isAccessible ? "text-gray-900" : "text-cyan-400"}`}>
-                      Educational Simulation (Recommended)
-                    </label>
-                  </div>
-                  <p className={`text-xs ${isAccessible ? "text-gray-600" : "text-gray-400"} ml-6`}>
-                    Uses curated examples to demonstrate tracking mechanisms. Zero environmental impact.
-                  </p>
-                </div>
-
-                <div className={`p-4 rounded-lg ${isAccessible ? "bg-gray-50 border border-gray-200" : "bg-black/30 border border-orange-500/30"}`}>
-                  <div className="flex items-center space-x-2 mb-2">
-                    <Checkbox 
-                      id="realdata" 
-                      checked={useRealData}
-                      onCheckedChange={setUseRealData}
-                    />
-                    <label htmlFor="realdata" className={`text-sm font-medium ${isAccessible ? "text-gray-900" : "text-orange-400"}`}>
-                      Real-Time Analysis (Higher Impact)
-                    </label>
-                  </div>
-                  <p className={`text-xs ${isAccessible ? "text-gray-600" : "text-gray-400"} ml-6 mb-3`}>
-                    Analyzes actual website tracking. Higher energy consumption and carbon footprint.
-                  </p>
-
-                  {useRealData && (
-                    <div className="ml-6 space-y-2">
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="browser-cookies" 
-                          checked={browserCookiesConsent}
-                          onCheckedChange={setBrowserCookiesConsent}
-                        />
-                        <label htmlFor="browser-cookies" className={`text-xs ${isAccessible ? "text-gray-700" : "text-yellow-300"}`}>
-                          Access browser cookies for this URL
-                        </label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="web-scraping" 
-                          checked={webScrapingConsent}
-                          onCheckedChange={setWebScrapingConsent}
-                        />
-                        <label htmlFor="web-scraping" className={`text-xs ${isAccessible ? "text-gray-700" : "text-yellow-300"}`}>
-                          Fetch and analyze website content (web scraping)
-                        </label>
-                      </div>
+                  <h4 className={`text-sm font-medium mb-3 ${isAccessible ? "text-gray-900" : "text-cyan-400"}`}>
+                    Real-Time Analysis Permissions
+                  </h4>
+                  
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="web-scraping" 
+                        checked={webScrapingConsent}
+                        onCheckedChange={setWebScrapingConsent}
+                      />
+                      <label htmlFor="web-scraping" className={`text-sm ${isAccessible ? "text-gray-700" : "text-yellow-300"}`}>
+                        Fetch and analyze website content (web scraping)
+                      </label>
                     </div>
-                  )}
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="browser-cookies" 
+                        checked={browserCookiesConsent}
+                        onCheckedChange={setBrowserCookiesConsent}
+                      />
+                      <label htmlFor="browser-cookies" className={`text-sm ${isAccessible ? "text-gray-700" : "text-yellow-300"}`}>
+                        Analyze tracking cookies and surveillance scripts
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <p className={`text-xs mt-3 ${isAccessible ? "text-gray-600" : "text-gray-400"}`}>
+                    ⚠️ Real-time analysis has environmental impact through data transfer and processing.
+                  </p>
                 </div>
 
-                <Alert className={`${isAccessible ? "border-blue-200 bg-blue-50" : "border-cyan-500 bg-cyan-500/10 pixel-border"}`}>
-                  <Info className={`h-4 w-4 ${isAccessible ? "text-blue-600" : "text-cyan-400"}`} />
-                  <AlertDescription className={isAccessible ? "text-blue-800" : "text-cyan-200"}>
-                    <strong>Transparency Promise:</strong> All data sources will be clearly labeled. No personal data is stored. 
-                    Environmental impact metrics will be displayed for real-time analysis.
+                <Alert className={`${isAccessible ? "border-purple-200 bg-purple-50" : "border-purple-500 bg-purple-500/10 pixel-border"}`}>
+                  <Info className={`h-4 w-4 ${isAccessible ? "text-purple-600" : "text-purple-400"}`} />
+                  <AlertDescription className={isAccessible ? "text-purple-800" : "text-purple-200"}>
+                    <strong>Feminist Technoscience Approach:</strong> This tool reveals hidden surveillance to enable agency. 
+                    All analysis is transparent with environmental impact tracked. No personal data is stored permanently.
                   </AlertDescription>
                 </Alert>
 
                 <div className="flex gap-3">
                   <Button 
                     onClick={executeAnalysisWithConsent}
-                    className={`flex-1 ${isAccessible ? "bg-blue-600 hover:bg-blue-700" : "bg-purple-600 hover:bg-purple-700 sparkle"}`}
+                    disabled={!browserCookiesConsent && !webScrapingConsent}
+                    className={`flex-1 ${isAccessible ? "bg-purple-600 hover:bg-purple-700" : "bg-purple-600 hover:bg-purple-700 sparkle"}`}
                   >
                     <Shield className="w-4 h-4 mr-2" />
-                    Proceed with Analysis
+                    Begin Real-Time Analysis
                   </Button>
                   <Button 
                     variant="outline"
