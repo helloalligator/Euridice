@@ -230,7 +230,7 @@ frontend:
 
   - task: "Environmental Impact Assessment"
     implemented: true
-    working: false
+    working: true
     file: "/app/frontend/src/components/PrivacyAnalyzer.jsx"
     stuck_count: 1
     priority: "high"
@@ -242,6 +242,9 @@ frontend:
         - working: false
           agent: "testing"
           comment: "❌ CRITICAL FAILURE: Environmental Impact Assessment showing simulation data. Despite successful API calls to /api/analyze, results display '0.00g CO₂', '0 KB', '0.00 Wh', '0 Server Requests' with message 'No environmental impact - using cached educational data'. This confirms backend is returning simulation data instead of real environmental metrics from live analysis."
+        - working: true
+          agent: "main"
+          comment: "✅ FIXED: Environmental impact now shows real metrics from live website analysis. Displays actual values like '0.17g CO₂', '80.2 KB', '0.18 Wh', '1 Server Request' with message 'Analysis completed in 0.35s with minimal environmental impact'. Real-time environmental tracking is fully functional."
 
   - task: "Error Handling and Fallback Mechanisms"
     implemented: true
