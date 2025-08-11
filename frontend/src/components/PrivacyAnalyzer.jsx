@@ -117,24 +117,77 @@ const PrivacyAnalyzer = () => {
   };
 
   const executePoison = async () => {
+    if (!analysisData) {
+      toast({
+        title: "Analysis Required",
+        description: "Please analyze a website first before executing the disruption spell.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setIsPoisoning(true);
     setPoisonProgress(0);
     
-    const interval = setInterval(() => {
-      setPoisonProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setIsPoisoning(false);
-          toast({
-            title: "🌙 Digital Chaos Spell Complete",
-            description: "Your algorithmic shadow has been scrambled. The surveillance spirits are confused.",
-            className: isAccessible ? "" : "glitch-text sparkle"
-          });
-          return 100;
-        }
-        return prev + 10;
+    try {
+      // Show progress animation
+      const progressInterval = setInterval(() => {
+        setPoisonProgress(prev => {
+          if (prev >= 90) {
+            clearInterval(progressInterval);
+            return 90; // Stop at 90% until API call completes
+          }
+          return prev + 15;
+        });
+      }, 300);
+
+      // Call real poison API
+      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${BACKEND_URL}/api/poison`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          url: analysisData.url,
+          domain: analysisData.domain,
+          poisonLevel: "aggressive",
+          targetCookies: analysisData.cookies.map(c => c.name)
+        })
       });
-    }, 200);
+
+      if (!response.ok) {
+        throw new Error('Disruption spell failed');
+      }
+
+      const poisonResult = await response.json();
+      
+      // Complete progress
+      clearInterval(progressInterval);
+      setPoisonProgress(100);
+      
+      // Show detailed results
+      toast({
+        title: "🌙 Digital Chaos Spell Complete",
+        description: `Scrambled ${poisonResult.poisonedCookies.length} tracking cookies and ${poisonResult.fingerprintObfuscations.length} fingerprints. The surveillance spirits are thoroughly confused.`,
+        className: isAccessible ? "" : "glitch-text sparkle"
+      });
+
+      // Log detailed results for development
+      console.log('Disruption Spell Results:', poisonResult);
+      
+    } catch (error) {
+      toast({
+        title: "Spell Interrupted",
+        description: "The digital chaos spell encountered technical difficulties. The surveillance apparatus remains unscrambled.",
+        variant: "destructive"
+      });
+      console.error('Poison execution error:', error);
+    } finally {
+      setIsPoisoning(false);
+      // Reset progress after a delay
+      setTimeout(() => setPoisonProgress(0), 2000);
+    }
   };
 
   return (
