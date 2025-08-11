@@ -113,85 +113,8 @@ const PrivacyAnalyzer = () => {
     setConsentGiven(true);
     setShowConsent(false);
     
-    // Small delay to ensure state updates are processed
-    setTimeout(async () => {
-      setIsAnalyzing(true);
-      setEnvironmentalImpact(null);
-
-      try {
-        if (useRealData && (browserCookiesConsent || webScrapingConsent)) {
-          // Call backend for real analysis
-          const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-          const response = await fetch(`${BACKEND_URL}/api/analyze`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              url,
-              options: {
-                includeBrowserCookies: browserCookiesConsent,
-                includeWebScraping: webScrapingConsent,
-                includeFingerprinting: true,
-                includeEnvironmentalMetrics: true
-              }
-            })
-          });
-
-          if (!response.ok) {
-            throw new Error('Analysis failed');
-          }
-
-          const data = await response.json();
-          setAnalysisData(data);
-          setEnvironmentalImpact(data.environmentalImpact);
-        } else {
-          // Use mock data for educational purposes
-          const mockAnalysis = mockData.getAnalysisData(url);
-          mockAnalysis.dataSource = "Educational Simulation";
-          mockAnalysis.isRealData = false;
-          
-          // Mock environmental impact
-          const mockEnvironmentalImpact = {
-            carbonFootprint: "0.0g CO₂",
-            dataTransfer: "0 MB",
-            energyUsed: "0 Wh",
-            serverRequests: 0,
-            message: "No environmental impact - using cached educational data"
-          };
-          
-          // Simulate analysis time
-          await new Promise(resolve => setTimeout(resolve, 2000));
-          
-          setAnalysisData(mockAnalysis);
-          setEnvironmentalImpact(mockEnvironmentalImpact);
-        }
-      } catch (error) {
-        toast({
-          title: "Analysis Failed",
-          description: "Could not complete real-time analysis. Using educational simulation.",
-          variant: "destructive"
-        });
-        
-        // Fallback to mock data
-        const mockAnalysis = mockData.getAnalysisData(url);
-        mockAnalysis.dataSource = "Educational Simulation (Fallback)";
-        mockAnalysis.isRealData = false;
-        
-        const mockEnvironmentalImpact = {
-          carbonFootprint: "0.0g CO₂",
-          dataTransfer: "0 MB", 
-          energyUsed: "0 Wh",
-          serverRequests: 0,
-          message: "No environmental impact - using cached educational data"
-        };
-        
-        setAnalysisData(mockAnalysis);
-        setEnvironmentalImpact(mockEnvironmentalImpact);
-      } finally {
-        setIsAnalyzing(false);
-      }
-    }, 100);
+    // Perform real-time analysis immediately
+    await performRealTimeAnalysis();
   };
 
   const executePoison = async () => {
