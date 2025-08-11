@@ -80,7 +80,7 @@ const PrivacyAnalyzer = () => {
           url,
           options: {
             includeBrowserCookies: browserCookiesConsent,
-            includeWebScraping: webScrapingConsent,
+            includeWebScraping: true, // Always true for real-time analysis
             includeFingerprinting: true,
             includeEnvironmentalMetrics: true
           }
