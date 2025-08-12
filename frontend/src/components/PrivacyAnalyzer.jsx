@@ -41,6 +41,7 @@ const PrivacyAnalyzer = () => {
   const [browserCookiesConsent, setBrowserCookiesConsent] = useState(false);
   const [environmentalImpact, setEnvironmentalImpact] = useState(null);
   const [isSpellActive, setIsSpellActive] = useState(false);
+  const [selectedPersona, setSelectedPersona] = useState(null);
   const { toast } = useToast();
 
   const containerClass = isAccessible ? "accessibility-mode" : "";
