@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Alert, AlertDescription } from "./ui/alert";
 import { Checkbox } from "./ui/checkbox";
 import { useToast } from "../hooks/use-toast";
+import realTimeScrambler from "../utils/realTimeScrambler";
 import { 
   Eye, 
   Shield, 
