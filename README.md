@@ -1,7 +1,12 @@
 # Euridice 🌙
 ## A Metadata Beholder • Digital Spellbook for Algorithmic Resistance
+### An Auralia Archive Project
 
 > *"Your computer isn't neutral—systems track everything you do. This playful browser tool protects your privacy by scrambling the data websites collect about you."*
+
+**Created by:** [ayshao.com](https://ayshao.com)  
+**Project:** Auralia Archive - Digital Resistance Research  
+**Repository:** [GitHub](https://github.com/ayshao/euridice)
 
 Euridice is a **real-time digital resistance platform** that moves beyond traditional privacy tools by actively disrupting surveillance systems rather than simply blocking them. Grounded in **glitch feminist praxis** and **design justice principles**, it transforms users from passive subjects of algorithmic surveillance into active agents of technological resistance.
 
