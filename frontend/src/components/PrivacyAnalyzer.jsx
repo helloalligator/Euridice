@@ -843,18 +843,6 @@ const PrivacyAnalyzer = () => {
                   </div>
                 </div>
                 
-                {isPoisoning && (
-                  <div className="space-y-2">
-                    <Progress 
-                      value={poisonProgress} 
-                      className={`h-3 ${isAccessible ? "" : "pixel-border"}`}
-                    />
-                    <p className={`text-sm ${isAccessible ? "text-gray-600" : "text-purple-300 glitch-text"}`}>
-                      Casting real-time disruption spell... {poisonProgress}%
-                    </p>
-                  </div>
-                )}
-
                 {/* Real-time spell status */}
                 {isSpellActive && (
                   <div className={`p-3 rounded-lg ${isAccessible ? "bg-green-50 border border-green-200" : "bg-green-500/10 border border-green-500/30"}`}>
@@ -864,7 +852,9 @@ const PrivacyAnalyzer = () => {
                           ⚡ Real-Time Disruption Active
                         </p>
                         <p className={`text-xs ${isAccessible ? "text-green-700" : "text-green-300"}`}>
-                          9 scrambling techniques running continuously
+                          {selectedPersona && `Active as ${selectedPersona === 'octopus' ? '🐙 Sentient Octopus' : 
+                            selectedPersona === 'euridice' ? '🌿 Greek Folk Hero Euridice' : 
+                            '🤖 Bladerunner Replicant'} - 9 scrambling techniques running continuously`}
                         </p>
                       </div>
                       <Button
@@ -879,42 +869,36 @@ const PrivacyAnalyzer = () => {
                   </div>
                 )}
 
-                <div className="flex gap-3">
-                  <Button 
-                    onClick={executePoison}
-                    disabled={isPoisoning || isSpellActive}
-                    className={`flex-1 ${isAccessible ? "bg-purple-600 hover:bg-purple-700" : "bg-purple-600 hover:bg-purple-700 sparkle glitch-text"}`}
-                    size="lg"
-                  >
-                    {isPoisoning ? (
-                      <>
-                        <Sparkles className="w-5 h-5 mr-2 animate-spin" />
-                        Casting Real-Time Disruption Spell...
-                      </>
-                    ) : isSpellActive ? (
-                      <>
-                        <Shield className="w-5 h-5 mr-2" />
-                        Disruption Spell Active
-                      </>
-                    ) : (
-                      <>
-                        <Shield className="w-5 h-5 mr-2" />
-                        Execute Real-Time Disruption Spell
-                      </>
-                    )}
-                  </Button>
-                  
-                  {isSpellActive && (
+                {/* Spell activation controls */}
+                {!isSpellActive && isPoisoning && (
+                  <div className="space-y-2">
+                    <Progress 
+                      value={poisonProgress} 
+                      className={`h-3 ${isAccessible ? "" : "pixel-border"}`}
+                    />
+                    <p className={`text-sm ${isAccessible ? "text-gray-600" : "text-purple-300 glitch-text"}`}>
+                      Casting {selectedPersona === 'octopus' ? '🐙 Octopus' : 
+                        selectedPersona === 'euridice' ? '🌿 Euridice' : 
+                        '🤖 Replicant'} disruption spell... {poisonProgress}%
+                    </p>
+                  </div>
+                )}
+
+                {/* Alternative spell dispel button */}
+                {isSpellActive && (
+                  <div className="text-center">
                     <Button
                       onClick={stopDisruptionSpell}
                       variant="outline"
                       size="lg"
                       className={`${isAccessible ? "border-red-300 text-red-700 hover:bg-red-100" : "border-red-500 text-red-400 hover:bg-red-500/20"}`}
                     >
-                      Stop Spell
+                      🌙 Dispel {selectedPersona === 'octopus' ? 'Octopus' : 
+                        selectedPersona === 'euridice' ? 'Euridice' : 
+                        'Replicant'} Spell
                     </Button>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
