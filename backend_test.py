@@ -782,10 +782,10 @@ class EuridiceBackendTester:
 
     def run_all_tests(self) -> Dict[str, Any]:
         """Run all backend tests and return comprehensive results"""
-        print("🧪 Starting Euridice Backend Testing Suite")
-        print("=" * 60)
+        print("🧪 Starting Euridice Backend Testing Suite - Enhanced Threat Level Analysis")
+        print("=" * 70)
         
-        # Test order: connectivity first, then core functionality
+        # Test order: connectivity first, then core functionality, then enhanced features
         tests = [
             self.test_backend_connectivity,
             self.test_real_time_analysis_facebook,
@@ -794,7 +794,13 @@ class EuridiceBackendTester:
             self.test_cookie_poisoning_targeted,
             self.test_fingerprint_obfuscation_details,
             self.test_environmental_impact_consistency,
-            self.test_no_simulation_fallbacks
+            self.test_no_simulation_fallbacks,
+            # Enhanced threat level analysis tests
+            self.test_high_threat_domain_detection,
+            self.test_tracking_mechanism_count_assessment,
+            self.test_advanced_tracking_indicators,
+            self.test_mongodb_logging_enhancement,
+            self.test_enhanced_response_format
         ]
         
         passed = 0
