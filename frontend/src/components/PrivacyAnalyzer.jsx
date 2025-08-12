@@ -415,6 +415,34 @@ const PrivacyAnalyzer = () => {
                       </p>
                     </div>
                   </div>
+                  
+                  {/* Detailed explanation of data sources and calculations */}
+                  <div className={`mt-4 p-4 rounded-lg ${isAccessible ? "bg-blue-50 border border-blue-200" : "bg-cyan-500/10 border border-cyan-500/30"}`}>
+                    <h4 className={`text-sm font-semibold mb-2 ${isAccessible ? "text-blue-900" : "text-cyan-400"}`}>
+                      🌍 How We Calculate Environmental Impact
+                    </h4>
+                    <div className={`text-xs space-y-2 ${isAccessible ? "text-blue-800" : "text-cyan-200"}`}>
+                      <p>
+                        <strong>Carbon Footprint:</strong> Calculated from data transfer (~0.5g CO₂ per MB), 
+                        server processing time (~0.1g CO₂ per second), and network requests (~0.1g CO₂ per request). 
+                        Based on global internet carbon intensity averages.
+                      </p>
+                      <p>
+                        <strong>Data Transfer:</strong> Measures actual bytes transferred during website fetching, 
+                        HTML parsing, and cookie analysis. Includes HTTP headers, page content, and API responses.
+                      </p>
+                      <p>
+                        <strong>Energy Used:</strong> Server processing energy for web scraping, content analysis, 
+                        fingerprinting detection, and AI pattern recognition. Estimated at ~0.5 Wh per second of processing.
+                      </p>
+                      <p>
+                        <strong>Digital Justice Principle:</strong> We track environmental impact to maintain transparency 
+                        about the cost of resistance. Every act of surveillance detection requires computational resources—
+                        awareness enables more mindful digital resistance practices.
+                      </p>
+                    </div>
+                  </div>
+                  
                   {environmentalImpact.message && (
                     <p className={`text-sm mt-3 italic ${isAccessible ? "text-gray-600" : "text-green-300"}`}>
                       {environmentalImpact.message}
