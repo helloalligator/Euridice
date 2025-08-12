@@ -192,7 +192,7 @@ class PrivacyAnalyzer:
         )
         
         # Generate analysis metrics
-        threat_level = "HIGH" if len(cookies) > 10 or any(fp.detected for fp in fingerprinting_methods) else "MEDIUM"
+        threat_level, threat_description, tracking_indicators = self._calculate_threat_level(cookies, fingerprinting_methods, third_parties, domain)
         fingerprinting_score = min(100, len([fp for fp in fingerprinting_methods if fp.detected]) * 15 + 40)
         
         return AnalysisResponse(
