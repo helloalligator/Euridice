@@ -1107,6 +1107,45 @@ const PrivacyAnalyzer = () => {
             — Rosa Menkman, Glitch Studies Manifesto
           </p>
         </div>
+        {/* Footer Attribution */}
+        <footer className={`mt-12 pt-8 border-t text-center ${
+          isAccessible ? "border-gray-200" : "border-purple-500/30"
+        }`}>
+          <div className="space-y-2">
+            <p className={`text-sm ${isAccessible ? "text-gray-600" : "text-purple-300"}`}>
+              An <strong>Auralia Archive Project</strong>
+            </p>
+            <div className="flex justify-center gap-6 text-xs">
+              <a 
+                href="https://github.com/yourusername/euridice" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={`hover:underline transition-colors ${
+                  isAccessible ? "text-blue-600 hover:text-blue-800" : "text-cyan-400 hover:text-cyan-300"
+                }`}
+              >
+                📂 GitHub Repository
+              </a>
+              <span className={isAccessible ? "text-gray-400" : "text-gray-500"}>•</span>
+              <a 
+                href="https://ayshao.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={`hover:underline transition-colors ${
+                  isAccessible ? "text-purple-600 hover:text-purple-800" : "text-purple-400 hover:text-purple-300"
+                }`}
+              >
+                🌐 ayshao.com
+              </a>
+            </div>
+            <p className={`text-xs italic mt-2 ${
+              isAccessible ? "text-gray-500" : "text-gray-400"
+            }`}>
+              Digital resistance through glitch feminist praxis • Open source & academic research
+            </p>
+          </div>
+        </footer>
+
       </div>
     </div>
   );
