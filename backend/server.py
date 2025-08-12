@@ -341,7 +341,7 @@ class PrivacyAnalyzer:
         
         return data_carbon + processing_carbon + request_carbon
 
-    def _calculate_threat_level(self, cookies: List[Dict], fingerprinting: List[Dict], third_parties: List[Dict], domain: str) -> str:
+    def _calculate_threat_level(self, cookies: List[Cookie], fingerprinting: List[FingerprintingMethod], third_parties: List[ThirdParty], domain: str) -> tuple:
         """Calculate threat level based on total tracking mechanisms and domain reputation"""
         
         # Count total tracking mechanisms
@@ -387,19 +387,19 @@ class PrivacyAnalyzer:
         tracking_indicators = []
         
         # Check for tracking pixels in cookies
-        pixel_cookies = [c for c in cookies if any(pixel in c.get('name', '').lower() 
+        pixel_cookies = [c for c in cookies if any(pixel in c.name.lower() 
                         for pixel in ['pixel', 'track', 'analytics', 'gtm', 'fbp', '_ga', '_gid'])]
         if pixel_cookies:
             tracking_indicators.append(f"{len(pixel_cookies)} tracking pixels")
         
         # Check for fingerprinting techniques
-        advanced_fingerprinting = [f for f in fingerprinting if f.get('method') in 
-                                 ['canvas', 'webgl', 'audio', 'battery', 'webrtc']]
+        advanced_fingerprinting = [f for f in fingerprinting if any(technique in f.technique.lower() 
+                                 for technique in ['canvas', 'webgl', 'audio', 'battery', 'webrtc']) and f.detected]
         if advanced_fingerprinting:
             tracking_indicators.append(f"{len(advanced_fingerprinting)} advanced fingerprinting")
         
         # Check for third-party trackers
-        major_trackers = [t for t in third_parties if any(tracker in t.get('name', '').lower() 
+        major_trackers = [t for t in third_parties if any(tracker in t.domain.lower() 
                          for tracker in ['google', 'facebook', 'amazon', 'microsoft', 'adobe'])]
         if major_trackers:
             tracking_indicators.append(f"{len(major_trackers)} major trackers")
@@ -425,7 +425,7 @@ class PrivacyAnalyzer:
             len(cookies) <= 3,  # Few cookies
             len(third_parties) <= 2,  # Minimal third parties
             not any(tracker in domain.lower() for tracker in ['google', 'facebook', 'amazon', 'microsoft']),
-            not any(t.get('name', '').lower() in ['google-analytics', 'facebook-pixel', 'google-tag-manager'] 
+            not any(t.domain.lower() in ['google-analytics', 'facebook-pixel', 'google-tag-manager'] 
                    for t in third_parties)
         ]
         
