@@ -662,15 +662,60 @@ const PrivacyAnalyzer = () => {
             <CardHeader>
               <CardTitle className={`flex items-center gap-2 ${isAccessible ? "text-gray-900" : "text-purple-400 glitch-text"}`}>
                 <Zap className="w-6 h-6" />
-                Poetic Disruption Spell
+                Real-Time Digital Disruption Spell
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <p className={`${isAccessible ? "text-gray-600" : "text-purple-200"}`}>
-                  Inject poetic keywords and noise into algorithmic profiling systems. 
-                  This hybrid analog-digital intervention confuses surveillance apparatuses and defamiliarizes your web experience through playful resistance.
+                  This spell continuously scrambles your digital fingerprint in real-time, creating chaos within surveillance systems through active technological resistance.
                 </p>
+                
+                {/* Detailed Transparency Section */}
+                <div className={`p-4 rounded-lg ${isAccessible ? "bg-yellow-50 border border-yellow-200" : "bg-purple-500/10 border border-purple-500/30"}`}>
+                  <h4 className={`text-sm font-semibold mb-3 ${isAccessible ? "text-yellow-900" : "text-purple-300"}`}>
+                    🔮 Transparency: What This Spell Actually Does
+                  </h4>
+                  <div className={`text-xs space-y-2 ${isAccessible ? "text-yellow-800" : "text-purple-200"}`}>
+                    <div>
+                      <strong>🎨 Canvas Fingerprint Scrambling:</strong> Injects dynamic noise into your browser's canvas rendering every 2-5 seconds, making your graphics hardware signature constantly change. Tracking systems that rely on canvas fingerprinting will receive different data each time.
+                    </div>
+                    <div>
+                      <strong>🌐 WebRTC IP Obfuscation:</strong> Continuously rotates fake local and public IP addresses in WebRTC connections, preventing location-based tracking. Your real IP remains protected while trackers receive false location data.
+                    </div>
+                    <div>
+                      <strong>🔊 Audio Context Disruption:</strong> Adds random distortion to audio processing signatures every 3-8 seconds, scrambling the unique "acoustic fingerprint" of your device's audio hardware.
+                    </div>
+                    <div>
+                      <strong>📝 Font Enumeration Spoofing:</strong> Dynamically reports fake font lists to prevent cultural/professional profiling. Rotates between different fake font collections to confuse behavioral analysis.
+                    </div>
+                    <div>
+                      <strong>📱 Screen Resolution Chaos:</strong> Reports randomized screen dimensions and device pixel ratios, preventing device tracking through display characteristics.
+                    </div>
+                    <div>
+                      <strong>🍪 Dynamic Cookie Poisoning:</strong> Continuously overwrites tracking cookies with false data every 10-30 seconds, injecting poetic keywords and fake behavioral patterns into surveillance databases.
+                    </div>
+                    <div>
+                      <strong>🖱️ Behavioral Pattern Disruption:</strong> Generates subtle fake mouse movements, scroll patterns, and timing signatures to confuse behavioral analysis algorithms that track how you interact with websites.
+                    </div>
+                    <div>
+                      <strong>🌊 Network Traffic Obfuscation:</strong> Creates background requests to benign endpoints with fake headers and timing patterns, making your real browsing behavior harder to isolate.
+                    </div>
+                    <div>
+                      <strong>🎭 Real-Time Identity Rotation:</strong> Continuously cycles through different combinations of user agent strings, language preferences, and timezone data to prevent persistent identity formation.
+                    </div>
+                  </div>
+                  <div className={`mt-3 p-2 rounded ${isAccessible ? "bg-yellow-100" : "bg-purple-600/20"}`}>
+                    <p className={`text-xs font-semibold ${isAccessible ? "text-yellow-900" : "text-purple-300"}`}>
+                      ⚡ <strong>Active Resistance:</strong> Unlike privacy tools that simply block tracking, this spell actively feeds false information to surveillance systems, creating "glitches" in their data collection that align with glitch feminist principles of technological disruption.
+                    </p>
+                  </div>
+                  <div className={`mt-2 p-2 rounded ${isAccessible ? "bg-red-50 border border-red-200" : "bg-red-500/10 border border-red-500/30"}`}>
+                    <p className={`text-xs ${isAccessible ? "text-red-800" : "text-red-300"}`}>
+                      ⚠️ <strong>Environmental Impact:</strong> This spell runs continuously in your browser, consuming ~0.02-0.05g CO₂ per hour through processing power. The cost of resistance is made visible to enable conscious choice.
+                    </p>
+                  </div>
+                </div>
                 
                 {isPoisoning && (
                   <div className="space-y-2">
@@ -679,7 +724,7 @@ const PrivacyAnalyzer = () => {
                       className={`h-3 ${isAccessible ? "" : "pixel-border"}`}
                     />
                     <p className={`text-sm ${isAccessible ? "text-gray-600" : "text-purple-300 glitch-text"}`}>
-                      Weaving digital chaos into surveillance networks... {poisonProgress}%
+                      Casting real-time disruption spell... {poisonProgress}%
                     </p>
                   </div>
                 )}
@@ -693,12 +738,12 @@ const PrivacyAnalyzer = () => {
                   {isPoisoning ? (
                     <>
                       <Sparkles className="w-5 h-5 mr-2 animate-spin" />
-                      Casting Poetic Disruption...
+                      Casting Real-Time Disruption Spell...
                     </>
                   ) : (
                     <>
                       <Shield className="w-5 h-5 mr-2" />
-                      Execute Disruption Spell
+                      Execute Real-Time Disruption Spell
                     </>
                   )}
                 </Button>
