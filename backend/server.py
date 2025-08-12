@@ -199,7 +199,7 @@ class PrivacyAnalyzer:
             url=url,
             domain=domain,
             threatLevel=threat_level,
-            threatDescription="Extensive algorithmic profiling apparatus detected" if threat_level == "HIGH" else "Moderate surveillance infrastructure present",
+            threatDescription=threat_description,
             cookieCount=len(cookies),
             fingerprintingScore=fingerprinting_score,
             analysisTimestamp=datetime.utcnow().isoformat(),
