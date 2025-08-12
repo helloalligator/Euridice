@@ -108,7 +108,7 @@ Inspired by **Micha Cárdenas**, **Sasha Costanza-Chock**, and **Thomas S. Mulla
 ### **Quick Start**
 ```bash
 # Clone the repository
-git clone https://github.com/ayshao/euridice.git
+git clone https://github.com/helloalligator/Euridice.git
 cd euridice
 
 # Install dependencies
