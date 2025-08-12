@@ -741,7 +741,153 @@ const PrivacyAnalyzer = () => {
           </>
         )}
 
-        {/* Cookie Poisoning Section */}
+        {/* Spell Results Modal */}
+        {showSpellResults && spellResults && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className={`max-w-2xl w-full max-h-[80vh] overflow-y-auto rounded-lg ${
+              isAccessible ? "bg-white border border-gray-300" : "bg-gray-900 border border-purple-500 pixel-border"
+            }`}>
+              <div className={`p-6 border-b ${isAccessible ? "border-gray-200" : "border-purple-500/30"}`}>
+                <h2 className={`text-2xl font-bold mb-2 ${
+                  isAccessible ? "text-gray-900" : "text-purple-400 glitch-text"
+                }`}>
+                  🎭 Wow! The Internet Wizards Have Cast a Magical Spell
+                </h2>
+                <p className={`text-sm ${isAccessible ? "text-gray-600" : "text-purple-200"}`}>
+                  Cast at {spellResults.timestamp} as {spellResults.persona}
+                </p>
+              </div>
+              
+              <div className="p-6 space-y-6">
+                <div>
+                  <h3 className={`text-lg font-semibold mb-3 ${
+                    isAccessible ? "text-gray-900" : "text-cyan-400"
+                  }`}>
+                    ✨ Here's What Changed:
+                  </h3>
+                  
+                  {/* Browser-Side Disruptions */}
+                  <div className={`p-4 rounded-lg mb-4 ${
+                    isAccessible ? "bg-blue-50 border border-blue-200" : "bg-blue-500/10 border border-blue-500/30"
+                  }`}>
+                    <h4 className={`font-semibold mb-2 ${
+                      isAccessible ? "text-blue-900" : "text-blue-400"
+                    }`}>
+                      🖥️ Browser-Side Reality Alterations:
+                    </h4>
+                    <ul className={`text-sm space-y-1 ${
+                      isAccessible ? "text-blue-800" : "text-blue-300"
+                    }`}>
+                      <li>🎨 <strong>Canvas Fingerprint:</strong> Injected magical noise into graphics rendering - your hardware signature now changes every 2-5 seconds</li>
+                      <li>🌐 <strong>WebRTC IP Addresses:</strong> Spoofed your location data with persona-specific fake IP addresses</li>
+                      <li>🔊 <strong>Audio Context:</strong> Added mystical distortion to audio processing signatures every 3-8 seconds</li>
+                      <li>📝 <strong>Font Enumeration:</strong> Replaced your real font list with persona-themed fake fonts</li>
+                      <li>📱 <strong>Screen Resolution:</strong> Now reporting randomized display dimensions to confuse device tracking</li>
+                      <li>🖱️ <strong>Mouse & Scroll Patterns:</strong> Generating fake {spellResults.persona.toLowerCase()} behavioral patterns in the background</li>
+                      <li>🎭 <strong>Digital Identity:</strong> Continuously rotating browser signatures, languages, and timezone data</li>
+                    </ul>
+                  </div>
+                  
+                  {/* Server-Side Results */}
+                  {spellResults.serverResults && (
+                    <div className={`p-4 rounded-lg mb-4 ${
+                      isAccessible ? "bg-green-50 border border-green-200" : "bg-green-500/10 border border-green-500/30"
+                    }`}>
+                      <h4 className={`font-semibold mb-2 ${
+                        isAccessible ? "text-green-900" : "text-green-400"
+                      }`}>
+                        🍪 Cookie Poison Spell Results:
+                      </h4>
+                      <ul className={`text-sm space-y-1 ${
+                        isAccessible ? "text-green-800" : "text-green-300"
+                      }`}>
+                        {spellResults.serverResults.poisonedCookies?.map((cookie, index) => (
+                          <li key={index}>
+                            🧪 <strong>{cookie.name}:</strong> Poisoned with "{cookie.poisonedValue}" using {cookie.technique}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  
+                  {/* Fingerprint Obfuscations */}
+                  {spellResults.serverResults?.fingerprintObfuscations && (
+                    <div className={`p-4 rounded-lg mb-4 ${
+                      isAccessible ? "bg-purple-50 border border-purple-200" : "bg-purple-500/10 border border-purple-500/30"
+                    }`}>
+                      <h4 className={`font-semibold mb-2 ${
+                        isAccessible ? "text-purple-900" : "text-purple-400"
+                      }`}>
+                        🔮 Fingerprint Obfuscation Spells:
+                      </h4>
+                      <ul className={`text-sm space-y-1 ${
+                        isAccessible ? "text-purple-800" : "text-purple-300"
+                      }`}>
+                        {spellResults.serverResults.fingerprintObfuscations.map((obfuscation, index) => (
+                          <li key={index}>
+                            ✨ <strong>{obfuscation.technique}:</strong> {obfuscation.description}
+                            <br />
+                            <span className="text-xs opacity-75">→ {obfuscation.obfuscated_data}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  
+                  {/* Environmental Impact */}
+                  {spellResults.serverResults?.environmentalImpact && (
+                    <div className={`p-4 rounded-lg ${
+                      isAccessible ? "bg-yellow-50 border border-yellow-200" : "bg-yellow-500/10 border border-yellow-500/30"
+                    }`}>
+                      <h4 className={`font-semibold mb-2 ${
+                        isAccessible ? "text-yellow-900" : "text-yellow-400"
+                      }`}>
+                        🌍 Magical Environmental Impact:
+                      </h4>
+                      <p className={`text-sm ${
+                        isAccessible ? "text-yellow-800" : "text-yellow-300"
+                      }`}>
+                        Carbon footprint: {spellResults.serverResults.environmentalImpact.carbonFootprint} | 
+                        Processing time: {spellResults.serverResults.environmentalImpact.processingTime} | 
+                        Data scrambled: {spellResults.serverResults.environmentalImpact.dataManipulated}
+                      </p>
+                    </div>
+                  )}
+                </div>
+                
+                <div className={`p-4 rounded-lg ${
+                  isAccessible ? "bg-gray-50" : "bg-gray-800/50"
+                }`}>
+                  <p className={`text-sm italic ${
+                    isAccessible ? "text-gray-700" : "text-gray-300"
+                  }`}>
+                    🎭 <strong>Spell Status:</strong> Your digital persona is now actively shape-shifting! 
+                    The surveillance algorithms are thoroughly confused by your new magical identity as {spellResults.persona}.
+                  </p>
+                </div>
+              </div>
+              
+              <div className={`p-6 border-t ${isAccessible ? "border-gray-200" : "border-purple-500/30"} flex justify-end gap-3`}>
+                <Button
+                  onClick={() => setShowSpellResults(false)}
+                  className={`${isAccessible ? "bg-purple-600 hover:bg-purple-700" : "bg-purple-600 hover:bg-purple-700 sparkle"}`}
+                >
+                  ✨ Magical! Continue Browsing
+                </Button>
+                <Button
+                  onClick={() => {
+                    setShowSpellResults(false);
+                    stopDisruptionSpell();
+                  }}
+                  variant="outline"
+                  className={`${isAccessible ? "border-red-300 text-red-700 hover:bg-red-100" : "border-red-500 text-red-400 hover:bg-red-500/20"}`}
+                >
+                  🌙 Dispel Magic
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
         {analysisData && (
           <Card className={`mb-8 ${isAccessible ? "bg-white border-gray-200" : "bg-gray-900 border-purple-500 pixel-border sparkle"}`}>
             <CardHeader>
