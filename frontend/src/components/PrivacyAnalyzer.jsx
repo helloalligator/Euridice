@@ -515,7 +515,9 @@ const PrivacyAnalyzer = () => {
                       {analysisData.threatLevel}
                     </div>
                     <p className={`text-sm mt-2 ${isAccessible ? "text-gray-600" : "text-gray-400"}`}>
-                      {analysisData.threatDescription}
+                      Based on {analysisData.cookies?.length || 0} tracking cookies, 
+                      {analysisData.fingerprinting?.length || 0} fingerprinting methods, and 
+                      {analysisData.thirdParties?.length || 0} third-party trackers detected.
                     </p>
                   </CardContent>
                 </Card>
