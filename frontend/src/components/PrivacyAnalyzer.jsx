@@ -40,6 +40,7 @@ const PrivacyAnalyzer = () => {
   const [useRealData, setUseRealData] = useState(true); // Always use real data now
   const [browserCookiesConsent, setBrowserCookiesConsent] = useState(false);
   const [environmentalImpact, setEnvironmentalImpact] = useState(null);
+  const [isSpellActive, setIsSpellActive] = useState(false);
   const { toast } = useToast();
 
   const containerClass = isAccessible ? "accessibility-mode" : "";
