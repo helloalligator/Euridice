@@ -711,8 +711,91 @@ const PrivacyAnalyzer = () => {
             <CardContent>
               <div className="space-y-4">
                 <p className={`${isAccessible ? "text-gray-600" : "text-purple-200"}`}>
-                  This spell continuously scrambles your digital fingerprint in real-time, creating chaos within surveillance systems through active technological resistance.
+                  Choose your digital persona to begin continuous surveillance disruption. Each identity uses specialized scrambling techniques to confuse algorithmic profiling.
                 </p>
+                
+                {/* Persona Selection Game Interface */}
+                {!isSpellActive && !isPoisoning && (
+                  <div className="space-y-4">
+                    <h4 className={`text-lg font-semibold ${isAccessible ? "text-gray-900" : "text-purple-300"}`}>
+                      🎭 Choose Your Digital Resistance Identity:
+                    </h4>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      {/* Octopus Persona */}
+                      <div 
+                        className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                          isAccessible 
+                            ? "border-blue-200 hover:border-blue-400 bg-blue-50 hover:bg-blue-100" 
+                            : "border-blue-500/30 hover:border-blue-400 bg-blue-500/10 hover:bg-blue-500/20"
+                        }`}
+                        onClick={() => executePoison('octopus')}
+                      >
+                        <div className="text-center">
+                          <div className="text-4xl mb-2">🐙</div>
+                          <h5 className={`font-semibold mb-2 ${isAccessible ? "text-blue-900" : "text-blue-400"}`}>
+                            Sentient Octopus
+                          </h5>
+                          <p className={`text-xs ${isAccessible ? "text-blue-700" : "text-blue-300"}`}>
+                            Living off the coast of British Columbia. Loves caviar, rare books, and puzzles. 
+                            Multi-tentacled browsing patterns with deep-sea wisdom.
+                          </p>
+                          <div className={`mt-2 text-xs ${isAccessible ? "text-blue-600" : "text-blue-400"}`}>
+                            <strong>Specializes in:</strong> Complex puzzle-solving patterns, underwater IP addresses, tentacle-based canvas signatures
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Euridice Persona */}
+                      <div 
+                        className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                          isAccessible 
+                            ? "border-green-200 hover:border-green-400 bg-green-50 hover:bg-green-100" 
+                            : "border-green-500/30 hover:border-green-400 bg-green-500/10 hover:bg-green-500/20"
+                        }`}
+                        onClick={() => executePoison('euridice')}
+                      >
+                        <div className="text-center">
+                          <div className="text-4xl mb-2">🌿</div>
+                          <h5 className={`font-semibold mb-2 ${isAccessible ? "text-green-900" : "text-green-400"}`}>
+                            Greek Folk Hero Euridice
+                          </h5>
+                          <p className={`text-xs ${isAccessible ? "text-green-700" : "text-green-300"}`}>
+                            Lives in a plant-filled apartment overlooking the Aegean Sea. 
+                            Collects myths, rare books, and wild herbs. Thoughtful, elusive, intentional.
+                          </p>
+                          <div className={`mt-2 text-xs ${isAccessible ? "text-green-600" : "text-green-400"}`}>
+                            <strong>Specializes in:</strong> Privacy-focused browsing, mythology research patterns, herbal wisdom signatures
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Replicant Persona */}
+                      <div 
+                        className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                          isAccessible 
+                            ? "border-purple-200 hover:border-purple-400 bg-purple-50 hover:bg-purple-100" 
+                            : "border-purple-500/30 hover:border-purple-400 bg-purple-500/10 hover:bg-purple-500/20"
+                        }`}
+                        onClick={() => executePoison('replicant')}
+                      >
+                        <div className="text-center">
+                          <div className="text-4xl mb-2">🤖</div>
+                          <h5 className={`font-semibold mb-2 ${isAccessible ? "text-purple-900" : "text-purple-400"}`}>
+                            Bladerunner Replicant
+                          </h5>
+                          <p className={`text-xs ${isAccessible ? "text-purple-700" : "text-purple-300"}`}>
+                            Advanced synthetic being with enhanced capabilities and complex memories. 
+                            Precise, calculated, with ultra-high definition digital processing.
+                          </p>
+                          <div className={`mt-2 text-xs ${isAccessible ? "text-purple-600" : "text-purple-400"}`}>
+                            <strong>Specializes in:</strong> Enhanced precision patterns, synthetic signatures, off-world data streams
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 
                 {/* Detailed Transparency Section */}
                 <div className={`p-4 rounded-lg ${isAccessible ? "bg-yellow-50 border border-yellow-200" : "bg-purple-500/10 border border-purple-500/30"}`}>
@@ -736,16 +819,16 @@ const PrivacyAnalyzer = () => {
                       <strong>📱 Screen Resolution Chaos:</strong> Reports randomized screen dimensions and device pixel ratios, preventing device tracking through display characteristics.
                     </div>
                     <div>
-                      <strong>🍪 Dynamic Cookie Poisoning:</strong> Continuously overwrites tracking cookies with false data every 10-30 seconds, injecting poetic keywords and fake behavioral patterns into surveillance databases.
+                      <strong>🍪 Dynamic Cookie Poisoning:</strong> Continuously overwrites tracking cookies with false data every 10-30 seconds, injecting persona-specific interests and fake behavioral patterns into surveillance databases.
                     </div>
                     <div>
-                      <strong>🖱️ Behavioral Pattern Disruption:</strong> Generates subtle fake mouse movements, scroll patterns, and timing signatures to confuse behavioral analysis algorithms that track how you interact with websites.
+                      <strong>🖱️ Behavioral Pattern Disruption:</strong> Generates subtle fake mouse movements, scroll patterns, and timing signatures based on your chosen persona to confuse behavioral analysis algorithms.
                     </div>
                     <div>
-                      <strong>🌊 Network Traffic Obfuscation:</strong> Creates background requests to benign endpoints with fake headers and timing patterns, making your real browsing behavior harder to isolate.
+                      <strong>🌊 Network Traffic Obfuscation:</strong> Creates background requests to benign endpoints with fake headers and persona-specific timing patterns, making your real browsing behavior harder to isolate.
                     </div>
                     <div>
-                      <strong>🎭 Real-Time Identity Rotation:</strong> Continuously cycles through different combinations of user agent strings, language preferences, and timezone data to prevent persistent identity formation.
+                      <strong>🎭 Real-Time Identity Rotation:</strong> Continuously cycles through different combinations of user agent strings, language preferences, and timezone data specific to your chosen persona to prevent persistent identity formation.
                     </div>
                   </div>
                   <div className={`mt-3 p-2 rounded ${isAccessible ? "bg-yellow-100" : "bg-purple-600/20"}`}>
