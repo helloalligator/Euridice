@@ -319,6 +319,100 @@ class PrivacyAnalyzer:
         
         return data_carbon + processing_carbon + request_carbon
 
+    def _calculate_threat_level(self, cookies: List[Dict], fingerprinting: List[Dict], third_parties: List[Dict], domain: str) -> str:
+        """Calculate threat level based on total tracking mechanisms and domain reputation"""
+        
+        # Count total tracking mechanisms
+        total_tracking = len(cookies) + len(fingerprinting) + len(third_parties)
+        
+        # Known high-threat domains (surveillance capitalism companies)
+        high_threat_domains = {
+            # Meta/Facebook ecosystem
+            'facebook.com', 'fb.com', 'meta.com', 'instagram.com', 'whatsapp.com',
+            # Google ecosystem  
+            'google.com', 'gmail.com', 'youtube.com', 'googlesyndication.com', 'doubleclick.net',
+            'googletagmanager.com', 'googleanalytics.com', 'googlepixel.com',
+            # Amazon ecosystem
+            'amazon.com', 'amazonpay.com', 'amazonaws.com', 'amazon-adsystem.com',
+            # Microsoft ecosystem
+            'microsoft.com', 'bing.com', 'office.com', 'outlook.com', 'msn.com',
+            # Marketing/Tracking platforms
+            'hubspot.com', 'salesforce.com', 'marketo.com', 'mailchimp.com',
+            # E-commerce tracking heavy
+            'temu.com', 'aliexpress.com', 'shopify.com', 'wix.com',
+            # Ad networks and tracking
+            'criteo.com', 'outbrain.com', 'taboola.com', 'branch.io',
+            # Analytics and pixels
+            'hotjar.com', 'fullstory.com', 'amplitude.com', 'mixpanel.com', 'segment.com',
+            # Social media
+            'twitter.com', 'x.com', 'linkedin.com', 'pinterest.com', 'snapchat.com', 'tiktok.com',
+            # News and media (heavy tracking)
+            'cnn.com', 'nytimes.com', 'washingtonpost.com', 'buzzfeed.com'
+        }
+        
+        # Extract base domain (remove subdomains for matching)
+        domain_parts = domain.lower().split('.')
+        if len(domain_parts) >= 2:
+            base_domain = '.'.join(domain_parts[-2:])  # e.g., "www.facebook.com" -> "facebook.com"
+        else:
+            base_domain = domain.lower()
+        
+        # Check if domain is known for heavy tracking
+        is_high_threat_domain = any(threat_domain in base_domain or base_domain in threat_domain 
+                                  for threat_domain in high_threat_domains)
+        
+        # Additional indicators of tracking-heavy sites
+        tracking_indicators = []
+        
+        # Check for tracking pixels in cookies
+        pixel_cookies = [c for c in cookies if any(pixel in c.get('name', '').lower() 
+                        for pixel in ['pixel', 'track', 'analytics', 'gtm', 'fbp', '_ga', '_gid'])]
+        if pixel_cookies:
+            tracking_indicators.append(f"{len(pixel_cookies)} tracking pixels")
+        
+        # Check for fingerprinting techniques
+        advanced_fingerprinting = [f for f in fingerprinting if f.get('method') in 
+                                 ['canvas', 'webgl', 'audio', 'battery', 'webrtc']]
+        if advanced_fingerprinting:
+            tracking_indicators.append(f"{len(advanced_fingerprinting)} advanced fingerprinting")
+        
+        # Check for third-party trackers
+        major_trackers = [t for t in third_parties if any(tracker in t.get('name', '').lower() 
+                         for tracker in ['google', 'facebook', 'amazon', 'microsoft', 'adobe'])]
+        if major_trackers:
+            tracking_indicators.append(f"{len(major_trackers)} major trackers")
+        
+        # Determine threat level
+        if is_high_threat_domain or total_tracking >= 16:
+            threat_level = "HIGH"
+            description = f"Surveillance-heavy domain with {total_tracking} tracking mechanisms"
+        elif total_tracking >= 10:
+            threat_level = "MEDIUM" 
+            description = f"Moderate tracking with {total_tracking} mechanisms detected"
+        else:
+            threat_level = "LOW"
+            description = f"Minimal tracking with {total_tracking} mechanisms detected"
+        
+        # Override for known surveillance platforms
+        if is_high_threat_domain:
+            threat_level = "HIGH"
+            description = f"Known surveillance platform ({base_domain}) with extensive tracking infrastructure"
+        
+        # Personal website detection (low threat override)
+        personal_indicators = [
+            len(cookies) <= 3,  # Few cookies
+            len(third_parties) <= 2,  # Minimal third parties
+            not any(tracker in domain.lower() for tracker in ['google', 'facebook', 'amazon', 'microsoft']),
+            not any(t.get('name', '').lower() in ['google-analytics', 'facebook-pixel', 'google-tag-manager'] 
+                   for t in third_parties)
+        ]
+        
+        if sum(personal_indicators) >= 3 and total_tracking <= 5:
+            threat_level = "LOW"
+            description = f"Personal/minimal tracking website with {total_tracking} mechanisms"
+        
+        return threat_level, description, tracking_indicators
+
     def _get_educational_cookies(self, domain: str) -> List[Cookie]:
         # Educational examples when real data isn't available
         return [
