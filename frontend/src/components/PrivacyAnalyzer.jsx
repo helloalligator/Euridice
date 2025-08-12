@@ -152,13 +152,17 @@ const PrivacyAnalyzer = () => {
         setPoisonProgress(prev => {
           if (prev >= 90) {
             clearInterval(progressInterval);
-            return 90; // Stop at 90% until API call completes
+            return 90; // Stop at 90% until operations complete
           }
           return prev + 15;
         });
       }, 300);
 
-      // Call real poison API
+      // Start real-time browser-side scrambling
+      const scramblerResult = realTimeScrambler.castSpell();
+      setIsSpellActive(true);
+
+      // Also call backend poison API for server-side tracking
       const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
       const response = await fetch(`${BACKEND_URL}/api/poison`, {
         method: 'POST',
@@ -174,7 +178,7 @@ const PrivacyAnalyzer = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Disruption spell failed');
+        throw new Error('Backend disruption spell failed');
       }
 
       const poisonResult = await response.json();
@@ -185,18 +189,21 @@ const PrivacyAnalyzer = () => {
       
       // Show detailed results
       toast({
-        title: "🌙 Digital Chaos Spell Complete",
-        description: `Scrambled ${poisonResult.poisonedCookies.length} tracking cookies and ${poisonResult.fingerprintObfuscations.length} fingerprints. The surveillance spirits are thoroughly confused.`,
+        title: "🌙 Real-Time Disruption Spell Active",
+        description: `Browser-side scrambling: ${scramblerResult.techniques.length} techniques active. Server-side: Scrambled ${poisonResult.poisonedCookies.length} cookies and ${poisonResult.fingerprintObfuscations.length} fingerprints. The surveillance spirits are thoroughly confused.`,
         className: isAccessible ? "" : "glitch-text sparkle"
       });
 
-      // Log detailed results for development
-      console.log('Disruption Spell Results:', poisonResult);
+      // Log detailed results
+      console.log('🔮 Real-Time Disruption Spell Results:', {
+        browserSide: scramblerResult,
+        serverSide: poisonResult
+      });
       
     } catch (error) {
       toast({
         title: "Spell Interrupted",
-        description: "The digital chaos spell encountered technical difficulties. The surveillance apparatus remains unscrambled.",
+        description: "The digital chaos spell encountered technical difficulties. Some disruption techniques may still be active.",
         variant: "destructive"
       });
       console.error('Poison execution error:', error);
@@ -206,6 +213,30 @@ const PrivacyAnalyzer = () => {
       setTimeout(() => setPoisonProgress(0), 2000);
     }
   };
+
+  const stopDisruptionSpell = () => {
+    if (isSpellActive) {
+      const result = realTimeScrambler.dispelSpell();
+      setIsSpellActive(false);
+      
+      toast({
+        title: "🌙 Disruption Spell Dispelled",
+        description: "Real-time scrambling has been stopped. Your digital fingerprint is returning to normal.",
+        className: isAccessible ? "" : "glitch-text"
+      });
+      
+      console.log('🔮 Disruption spell dispelled:', result);
+    }
+  };
+
+  // Clean up spell on component unmount
+  React.useEffect(() => {
+    return () => {
+      if (isSpellActive) {
+        realTimeScrambler.dispelSpell();
+      }
+    };
+  }, [isSpellActive]);
 
   return (
     <div className={`min-h-screen bg-black text-white p-4 ${containerClass}`}>
