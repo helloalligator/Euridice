@@ -221,7 +221,7 @@ When using Euridice in research, please cite:
 Euridice: A Digital Spellbook for Algorithmic Resistance (2025)
 An Auralia Archive Project by ayshao.com  
 Grounded in glitch feminist praxis and design justice principles
-https://github.com/ayshao/euridice
+https://github.com/helloalligator/Euridice
 ```
 
 ---
