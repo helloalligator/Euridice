@@ -2,7 +2,7 @@
 ## An Auralia Archive Project
 
 **Created by:** [ayshao.com](https://ayshao.com)  
-**Repository:** [GitHub](https://github.com/ayshao/euridice)
+**Repository:** [GitHub](https://github.com/helloalligator/Euridice)
 
 ## A Comprehensive Guide to User Experience, Code Architecture, Environmental Impact, and Open Source Ethics
 
