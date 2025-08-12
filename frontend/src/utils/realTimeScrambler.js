@@ -294,26 +294,24 @@ class RealTimeScrambler {
    */
   startFontEnumerationSpoofing() {
     const spoofFonts = () => {
-      if (!this.isActive) return;
+      if (!this.isActive || !this.currentPersona) return;
 
       try {
-        const fakeFontCollections = [
-          ['Arial', 'Times New Roman', 'Liberation Serif', 'Wildflower Script'],
-          ['Helvetica', 'Courier New', 'Sisterhood Display', 'Moon Sans'],
-          ['Georgia', 'Verdana', 'Disruption Mono', 'Enchanted Gothic'],
-          ['Comic Sans MS', 'Impact', 'Glitch Terminal', 'Chaos Typewriter']
-        ];
-
+        const personaData = this.personas[this.currentPersona];
+        
         // Override font detection methods
         if (document.fonts) {
           const originalCheck = document.fonts.check;
           document.fonts.check = function(font) {
-            // Randomly return true/false for fonts to confuse fingerprinting
+            // Return true for persona-specific fonts, random for others
+            if (personaData.fonts.some(f => font.includes(f))) {
+              return true;
+            }
             return Math.random() > 0.5;
           };
         }
 
-        console.log('📝 Font enumeration spoofed');
+        console.log(`📝 Font enumeration spoofed for ${personaData.name}`);
       } catch (error) {
         console.log('📝 Font spoofing attempted');
       }
@@ -326,22 +324,15 @@ class RealTimeScrambler {
 
   /**
    * Screen Resolution Chaos
-   * Reports randomized screen dimensions
+   * Reports randomized screen dimensions based on persona
    */
   startScreenResolutionChaos() {
     const chaosScreen = () => {
-      if (!this.isActive) return;
+      if (!this.isActive || !this.currentPersona) return;
 
       try {
-        const fakeResolutions = [
-          { width: 1920, height: 1080 },
-          { width: 1366, height: 768 },
-          { width: 1440, height: 900 },
-          { width: 1536, height: 864 },
-          { width: 1600, height: 900 }
-        ];
-
-        const fakeRes = fakeResolutions[Math.floor(Math.random() * fakeResolutions.length)];
+        const personaData = this.personas[this.currentPersona];
+        const fakeRes = personaData.screenResolutions[Math.floor(Math.random() * personaData.screenResolutions.length)];
         
         // Override screen properties
         Object.defineProperty(screen, 'width', { value: fakeRes.width, configurable: true });
@@ -349,7 +340,7 @@ class RealTimeScrambler {
         Object.defineProperty(screen, 'availWidth', { value: fakeRes.width, configurable: true });
         Object.defineProperty(screen, 'availHeight', { value: fakeRes.height - 40, configurable: true });
 
-        console.log('📱 Screen resolution chaos active');
+        console.log(`📱 Screen resolution chaos active for ${personaData.name}: ${fakeRes.width}x${fakeRes.height}`);
       } catch (error) {
         console.log('📱 Screen chaos attempted');
       }
@@ -362,22 +353,23 @@ class RealTimeScrambler {
 
   /**
    * Dynamic Cookie Poisoning
-   * Continuously overwrites tracking cookies with false data
+   * Continuously overwrites tracking cookies with persona-specific false data
    */
   startDynamicCookiePoisoning() {
     const poisonCookies = () => {
-      if (!this.isActive) return;
+      if (!this.isActive || !this.currentPersona) return;
 
       try {
+        const personaData = this.personas[this.currentPersona];
         const trackingCookies = ['_ga', '_gid', '_fbp', '_fbc', '__utma', '__utmz', '_hjid'];
-        const keyword = this.poeticKeywords[Math.floor(Math.random() * this.poeticKeywords.length)];
+        const interest = personaData.interests[Math.floor(Math.random() * personaData.interests.length)];
         
         trackingCookies.forEach(cookieName => {
-          const fakeValue = `${keyword}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+          const fakeValue = `${interest.replace(/\s+/g, '_')}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
           document.cookie = `${cookieName}=${fakeValue}; path=/; max-age=3600`;
         });
 
-        console.log('🍪 Tracking cookies poisoned with poetic chaos');
+        console.log(`🍪 Tracking cookies poisoned with ${personaData.name} interests`);
       } catch (error) {
         console.log('🍪 Cookie poisoning attempted');
       }
