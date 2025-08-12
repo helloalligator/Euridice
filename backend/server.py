@@ -221,6 +221,7 @@ class PrivacyAnalyzer:
             domain=domain,
             threatLevel=threat_level,
             threatDescription=threat_description,
+            trackingIndicators=tracking_indicators,
             cookieCount=len(cookies),
             fingerprintingScore=fingerprinting_score,
             analysisTimestamp=datetime.utcnow().isoformat(),
