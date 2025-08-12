@@ -1117,7 +1117,7 @@ const PrivacyAnalyzer = () => {
             </p>
             <div className="flex justify-center gap-6 text-xs">
               <a 
-                href="https://github.com/ayshao/euridice" 
+                href="https://github.com/helloalligator/Euridice" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className={`hover:underline transition-colors ${
