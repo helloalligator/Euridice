@@ -548,10 +548,15 @@ const PrivacyAnalyzer = () => {
                   </CardHeader>
                   <CardContent>
                     <div className={`text-3xl font-bold ${isAccessible ? "text-cyan-600" : "text-cyan-400"}`}>
-                      {analysisData.fingerprintingScore}%
+                      {Math.min(100, Math.round(
+                        ((analysisData.cookies?.length || 0) * 15) + 
+                        ((analysisData.fingerprinting?.length || 0) * 20) + 
+                        ((analysisData.thirdParties?.length || 0) * 10)
+                      ))}%
                     </div>
                     <p className={`text-sm mt-2 ${isAccessible ? "text-gray-600" : "text-gray-400"}`}>
-                      Identity extraction vulnerability
+                      Your "Algorithmic Shadow" is the invisible digital profile built from your browsing data. 
+                      Higher percentages indicate more comprehensive surveillance and behavioral prediction capability.
                     </p>
                     <p className={`text-xs mt-1 italic ${isAccessible ? "text-gray-500" : "text-purple-300"}`}>
                       Injected keyword: "{analysisData.poeticKeyword}"
