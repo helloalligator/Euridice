@@ -134,7 +134,7 @@ const PrivacyAnalyzer = () => {
     await performRealTimeAnalysis();
   };
 
-  const executePoison = async () => {
+  const executePoison = async (persona = 'octopus') => {
     if (!analysisData) {
       toast({
         title: "Analysis Required",
@@ -146,6 +146,7 @@ const PrivacyAnalyzer = () => {
 
     setIsPoisoning(true);
     setPoisonProgress(0);
+    setSelectedPersona(persona);
     
     try {
       // Show progress animation
@@ -159,8 +160,8 @@ const PrivacyAnalyzer = () => {
         });
       }, 300);
 
-      // Start real-time browser-side scrambling
-      const scramblerResult = realTimeScrambler.castSpell();
+      // Start real-time browser-side scrambling with persona
+      const scramblerResult = realTimeScrambler.castSpell(persona);
       setIsSpellActive(true);
 
       // Also call backend poison API for server-side tracking
@@ -174,7 +175,8 @@ const PrivacyAnalyzer = () => {
           url: analysisData.url,
           domain: analysisData.domain,
           poisonLevel: "aggressive",
-          targetCookies: analysisData.cookies.map(c => c.name)
+          targetCookies: analysisData.cookies.map(c => c.name),
+          persona: persona
         })
       });
 
@@ -190,8 +192,8 @@ const PrivacyAnalyzer = () => {
       
       // Show detailed results
       toast({
-        title: "🌙 Real-Time Disruption Spell Active",
-        description: `Browser-side scrambling: ${scramblerResult.techniques.length} techniques active. Server-side: Scrambled ${poisonResult.poisonedCookies.length} cookies and ${poisonResult.fingerprintObfuscations.length} fingerprints. The surveillance spirits are thoroughly confused.`,
+        title: `🌙 ${scramblerResult.persona} Disruption Spell Active`,
+        description: `Browser-side scrambling: ${scramblerResult.techniques.length} techniques active as ${scramblerResult.persona}. Server-side: Scrambled ${poisonResult.poisonedCookies.length} cookies and ${poisonResult.fingerprintObfuscations.length} fingerprints.`,
         className: isAccessible ? "" : "glitch-text sparkle"
       });
 
