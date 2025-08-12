@@ -2,6 +2,7 @@
  * Real-Time Digital Fingerprint Scrambler
  * A comprehensive browser-side surveillance disruption system
  * Implements glitch feminist praxis through continuous technological resistance
+ * with persona-based identity scrambling
  */
 
 class RealTimeScrambler {
@@ -9,34 +10,89 @@ class RealTimeScrambler {
     this.isActive = false;
     this.intervals = [];
     this.originalValues = {};
-    this.poeticKeywords = [
-      'liberation', 'sisterhood', 'wildflowers', 'moon', 'disruption', 'enchantment',
-      'fragment', 'rupture', 'solitude', 'sacred', 'resistance', 'chaos', 'glitch'
-    ];
-    this.fakeUserAgents = [
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-      'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36',
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101'
-    ];
+    this.currentPersona = null;
+    
+    // Define persona-specific data
+    this.personas = {
+      octopus: {
+        name: "Sentient Octopus",
+        description: "Living off the coast of British Columbia, loves caviar, rare books, and puzzles",
+        userAgents: [
+          'Mozilla/5.0 (Underwater; Cephalopod OS 8.3; Tentacle/42.0) Ceph/537.36',
+          'Mozilla/5.0 (Aquatic; Intel Ocean X 10_15_7) CephKit/537.36',
+          'OctoBrowser/4.2 (Compatible; MSIE 9.0; Underwater NT 6.1; Trident/5.0; Cephalopod)'
+        ],
+        languages: ['en-CA', 'ceph-BC', 'aq-DEEP'],
+        timezones: ['America/Vancouver', 'Pacific/Ocean_Floor', 'America/Victoria'],
+        locations: ['British Columbia Coast', 'Vancouver Island Waters', 'Pacific Northwest'],
+        interests: ['caviar', 'rare books', 'puzzles', 'deep sea philosophy', 'tentacle poetry'],
+        fonts: ['Tentacle Script', 'Deep Sea Sans', 'Caviar Display', 'Puzzle Mono', 'Octopus Serif'],
+        screenResolutions: [
+          { width: 1920, height: 1080, note: 'Eight-monitor setup for multitasking' },
+          { width: 2560, height: 1440, note: 'Underwater viewing optimal' }
+        ],
+        behaviorPatterns: ['methodical', 'puzzle-solving', 'book-browsing', 'caviar-seeking']
+      },
+      
+      euridice: {
+        name: "Greek Folk Hero Euridice", 
+        description: "Lives in a plant-filled apartment overlooking the Aegean Sea, collects myths and herbs",
+        userAgents: [
+          'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) LibreWolf',
+          'Mozilla/5.0 (Linux; Privacy-focused) Gecko/20100101 Firefox/91.0'
+        ],
+        languages: ['el-GR', 'en-GB', 'grc'],
+        timezones: ['Europe/Athens', 'Asia/Nicosia', 'Europe/Bucharest'],
+        locations: ['Aegean Sea Coast', 'Greek Islands', 'Plant-filled apartment'],
+        interests: ['mythology', 'rare books', 'wild herbs', 'digital archives', 'independent zines', 'folklore'],
+        fonts: ['Linux Libertine', 'DejaVu Serif', 'Philosopher', 'EB Garamond', 'Source Serif Pro'],
+        screenResolutions: [
+          { width: 1366, height: 768, note: 'Minimalist secondhand laptop setup' },
+          { width: 1440, height: 900, note: 'Simple, functional display' }
+        ],
+        behaviorPatterns: ['thoughtful', 'elusive', 'intentional', 'archive-browsing', 'herb-researching']
+      },
+      
+      replicant: {
+        name: "Bladerunner Replicant",
+        description: "Advanced synthetic being with enhanced capabilities and complex memories",
+        userAgents: [
+          'Mozilla/5.0 (Synthetic; Nexus-7 OS) Tyrell/537.36 Replicant/2019.11',
+          'BladeRunner/2049 (compatible; Nexus-6; Off-World) Enhancement/4.0',
+          'Mozilla/5.0 (Artificial; Enhancement Model) Synthetic/537.36'
+        ],
+        languages: ['en-US', 'ja-JP', 'ko-KR', 'synthetic'],
+        timezones: ['America/Los_Angeles', 'Asia/Tokyo', 'Synthetic/OffWorld'],
+        locations: ['Los Angeles 2049', 'Off-World Colonies', 'Synthetic Facility'],
+        interests: ['memory implants', 'origami', 'electric dreams', 'baseline tests', 'empathy analysis'],
+        fonts: ['Courier New', 'Monaco', 'Synthetic Display', 'Nexus Mono', 'Enhancement Sans'],
+        screenResolutions: [
+          { width: 1920, height: 1080, note: 'Enhanced visual processing' },
+          { width: 3840, height: 2160, note: 'Ultra-high definition synthetic vision' }
+        ],
+        behaviorPatterns: ['precise', 'calculated', 'enhanced-reflexes', 'memory-searching', 'empathy-testing']
+      }
+    };
   }
 
   /**
-   * Start the real-time scrambling spell
+   * Start the real-time scrambling spell with persona
    */
-  castSpell() {
+  castSpell(persona = 'octopus') {
     if (this.isActive) {
       console.log('🔮 Disruption spell already active');
       return;
     }
 
     this.isActive = true;
-    console.log('🌙 Casting Real-Time Digital Disruption Spell...');
+    this.currentPersona = persona;
+    console.log(`🌙 Casting Real-Time Digital Disruption Spell as ${this.personas[persona].name}...`);
 
     // Store original values for restoration if needed
     this.storeOriginalValues();
 
-    // Start all scrambling techniques
+    // Start all scrambling techniques with persona-specific data
     this.startCanvasScrambling();
     this.startWebRTCObfuscation();
     this.startAudioContextDisruption();
@@ -49,7 +105,9 @@ class RealTimeScrambler {
 
     return {
       success: true,
-      message: 'Real-time disruption spell cast successfully',
+      persona: this.personas[persona].name,
+      message: `Real-time disruption spell cast as ${this.personas[persona].name}`,
+      description: this.personas[persona].description,
       techniques: [
         'Canvas Fingerprint Scrambling',
         'WebRTC IP Obfuscation', 
