@@ -2,7 +2,7 @@
 ## An Auralia Archive Project
 
 **Created by:** [ayshao.com](https://ayshao.com)  
-**Repository:** [GitHub](https://github.com/ayshao/euridice)
+**Repository:** [GitHub](https://github.com/helloalligator/Euridice)
 
 ## Complete Breakdown of Programming Languages, Frameworks, and Technologies Used
 
