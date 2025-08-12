@@ -81,6 +81,7 @@ class AnalysisResponse(BaseModel):
     domain: str
     threatLevel: str
     threatDescription: str
+    trackingIndicators: List[str]
     cookieCount: int
     fingerprintingScore: int
     analysisTimestamp: str
