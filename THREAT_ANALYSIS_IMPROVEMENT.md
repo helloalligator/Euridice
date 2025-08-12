@@ -1,4 +1,8 @@
-# Euridice Threat Level Analysis - Comprehensive Improvement 🚨
+# Euridice: Threat Level Analysis - Comprehensive Improvement 🚨
+## An Auralia Archive Project
+
+**Created by:** [ayshao.com](https://ayshao.com)  
+**Repository:** [GitHub](https://github.com/helloalligator/Euridice)
 
 ## Enhanced Threat Assessment System Implementation
 
