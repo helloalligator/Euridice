@@ -381,47 +381,59 @@ class RealTimeScrambler {
   }
 
   /**
-   * Behavioral Pattern Disruption
-   * Generates fake user interaction patterns
+   * Real-Time Identity Rotation
+   * Continuously changes digital identity markers based on persona
    */
-  startBehavioralPatternDisruption() {
-    const disruptBehavior = () => {
-      if (!this.isActive) return;
+  startRealTimeIdentityRotation() {
+    const rotateIdentity = () => {
+      if (!this.isActive || !this.currentPersona) return;
 
       try {
-        // Generate subtle fake mouse movements
-        const fakeMouseEvent = new MouseEvent('mousemove', {
-          clientX: Math.random() * window.innerWidth,
-          clientY: Math.random() * window.innerHeight,
-          bubbles: false
+        const personaData = this.personas[this.currentPersona];
+        
+        // Override navigator properties with persona-specific data
+        Object.defineProperty(navigator, 'language', {
+          value: personaData.languages[Math.floor(Math.random() * personaData.languages.length)],
+          configurable: true
         });
-        
-        // Generate fake scroll events
-        const fakeScrollEvent = new Event('scroll', { bubbles: false });
-        
-        // Dispatch events quietly (no bubbling to avoid affecting user experience)
-        document.dispatchEvent(fakeMouseEvent);
-        window.dispatchEvent(fakeScrollEvent);
 
-        console.log('🖱️ Behavioral patterns disrupted');
+        Object.defineProperty(navigator, 'userAgent', {
+          value: personaData.userAgents[Math.floor(Math.random() * personaData.userAgents.length)],
+          configurable: true
+        });
+
+        // Override timezone with persona-specific locations
+        if (Intl && Intl.DateTimeFormat) {
+          const originalResolvedOptions = Intl.DateTimeFormat.prototype.resolvedOptions;
+          Intl.DateTimeFormat.prototype.resolvedOptions = function() {
+            const options = originalResolvedOptions.call(this);
+            options.timeZone = personaData.timezones[Math.floor(Math.random() * personaData.timezones.length)];
+            return options;
+          };
+        }
+
+        console.log(`🎭 Digital identity rotated to ${personaData.name}`);
       } catch (error) {
-        console.log('🖱️ Behavioral disruption attempted');
+        console.log('🎭 Identity rotation attempted');
       }
     };
 
-    const interval = setInterval(disruptBehavior, 5000 + Math.random() * 10000);
+    const interval = setInterval(rotateIdentity, 20000 + Math.random() * 30000);
     this.intervals.push(interval);
+    rotateIdentity();
   }
 
   /**
    * Network Traffic Obfuscation
-   * Creates fake background requests
+   * Creates fake background requests with persona-specific patterns
    */
   startNetworkTrafficObfuscation() {
     const obfuscateTraffic = () => {
-      if (!this.isActive) return;
+      if (!this.isActive || !this.currentPersona) return;
 
       try {
+        const personaData = this.personas[this.currentPersona];
+        
         // Generate fake requests to benign endpoints
         const fakeEndpoints = [
           'https://httpbin.org/headers',
@@ -430,21 +442,21 @@ class RealTimeScrambler {
         ];
 
         const endpoint = fakeEndpoints[Math.floor(Math.random() * fakeEndpoints.length)];
-        const keyword = this.poeticKeywords[Math.floor(Math.random() * this.poeticKeywords.length)];
+        const interest = personaData.interests[Math.floor(Math.random() * personaData.interests.length)];
         
         fetch(endpoint, {
           method: 'HEAD',
           headers: {
-            'X-Disruption-Keyword': keyword,
-            'X-Glitch-Feminist': 'true',
-            'User-Agent': this.fakeUserAgents[Math.floor(Math.random() * this.fakeUserAgents.length)]
+            'X-Persona-Interest': interest,
+            'X-Persona-Type': personaData.name,
+            'User-Agent': personaData.userAgents[Math.floor(Math.random() * personaData.userAgents.length)]
           },
           mode: 'no-cors'
         }).catch(() => {
           // Ignore errors - the point is to generate traffic patterns
         });
 
-        console.log('🌊 Network traffic obfuscated');
+        console.log(`🌊 Network traffic obfuscated for ${personaData.name}`);
       } catch (error) {
         console.log('🌊 Traffic obfuscation attempted');
       }
@@ -455,47 +467,68 @@ class RealTimeScrambler {
   }
 
   /**
-   * Real-Time Identity Rotation
-   * Continuously changes digital identity markers
+   * Behavioral Pattern Disruption
+   * Generates fake user interaction patterns based on persona
    */
-  startRealTimeIdentityRotation() {
-    const rotateIdentity = () => {
-      if (!this.isActive) return;
+  startBehavioralPatternDisruption() {
+    const disruptBehavior = () => {
+      if (!this.isActive || !this.currentPersona) return;
 
       try {
-        const fakeLanguages = ['en-US', 'en-GB', 'fr-FR', 'de-DE', 'es-ES', 'it-IT'];
-        const fakeTimezones = ['America/New_York', 'Europe/London', 'Asia/Tokyo', 'America/Los_Angeles'];
+        const personaData = this.personas[this.currentPersona];
         
-        // Override navigator properties
-        Object.defineProperty(navigator, 'language', {
-          value: fakeLanguages[Math.floor(Math.random() * fakeLanguages.length)],
-          configurable: true
-        });
-
-        Object.defineProperty(navigator, 'userAgent', {
-          value: this.fakeUserAgents[Math.floor(Math.random() * this.fakeUserAgents.length)],
-          configurable: true
-        });
-
-        // Override timezone
-        if (Intl && Intl.DateTimeFormat) {
-          const originalResolvedOptions = Intl.DateTimeFormat.prototype.resolvedOptions;
-          Intl.DateTimeFormat.prototype.resolvedOptions = function() {
-            const options = originalResolvedOptions.call(this);
-            options.timeZone = fakeTimezones[Math.floor(Math.random() * fakeTimezones.length)];
-            return options;
-          };
+        // Generate persona-specific behavioral patterns
+        let behaviorType = personaData.behaviorPatterns[Math.floor(Math.random() * personaData.behaviorPatterns.length)];
+        
+        // Generate fake mouse movements based on behavior type
+        let mousePattern;
+        switch(behaviorType) {
+          case 'methodical':
+          case 'precise':
+          case 'calculated':
+            // Precise, grid-like movements
+            mousePattern = {
+              clientX: Math.floor(window.innerWidth / 4) * Math.floor(Math.random() * 4),
+              clientY: Math.floor(window.innerHeight / 4) * Math.floor(Math.random() * 4)
+            };
+            break;
+          case 'thoughtful':
+          case 'intentional':
+            // Slower, more deliberate movements
+            mousePattern = {
+              clientX: window.innerWidth * (0.3 + Math.random() * 0.4),
+              clientY: window.innerHeight * (0.3 + Math.random() * 0.4)
+            };
+            break;  
+          default:
+            // Random movements
+            mousePattern = {
+              clientX: Math.random() * window.innerWidth,
+              clientY: Math.random() * window.innerHeight
+            };
         }
+        
+        const fakeMouseEvent = new MouseEvent('mousemove', {
+          clientX: mousePattern.clientX,
+          clientY: mousePattern.clientY,
+          bubbles: false
+        });
+        
+        // Generate fake scroll events
+        const fakeScrollEvent = new Event('scroll', { bubbles: false });
+        
+        // Dispatch events quietly (no bubbling to avoid affecting user experience)
+        document.dispatchEvent(fakeMouseEvent);
+        window.dispatchEvent(fakeScrollEvent);
 
-        console.log('🎭 Digital identity rotated');
+        console.log(`🖱️ Behavioral patterns disrupted for ${personaData.name}: ${behaviorType}`);
       } catch (error) {
-        console.log('🎭 Identity rotation attempted');
+        console.log('🖱️ Behavioral disruption attempted');
       }
     };
 
-    const interval = setInterval(rotateIdentity, 20000 + Math.random() * 30000);
+    const interval = setInterval(disruptBehavior, 5000 + Math.random() * 10000);
     this.intervals.push(interval);
-    rotateIdentity();
   }
 
   /**
