@@ -6,7 +6,7 @@
 
 **Created by:** [ayshao.com](https://ayshao.com)  
 **Project:** Auralia Archive - Digital Resistance Research  
-**Repository:** [GitHub](https://github.com/ayshao/euridice)
+**Repository:** [GitHub](https://github.com/helloalligator/Euridice)
 
 Euridice is a **real-time digital resistance platform** that moves beyond traditional privacy tools by actively disrupting surveillance systems rather than simply blocking them. Grounded in **glitch feminist praxis** and **design justice principles**, it transforms users from passive subjects of algorithmic surveillance into active agents of technological resistance.
 
