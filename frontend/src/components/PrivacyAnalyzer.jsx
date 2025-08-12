@@ -192,12 +192,16 @@ const PrivacyAnalyzer = () => {
       clearInterval(progressInterval);
       setPoisonProgress(100);
       
-      // Show detailed results
-      toast({
-        title: `🌙 ${scramblerResult.persona} Disruption Spell Active`,
-        description: `Browser-side scrambling: ${scramblerResult.techniques.length} techniques active as ${scramblerResult.persona}. Server-side: Scrambled ${poisonResult.poisonedCookies.length} cookies and ${poisonResult.fingerprintObfuscations.length} fingerprints.`,
-        className: isAccessible ? "" : "glitch-text sparkle"
+      // Store detailed results for the popup
+      setSpellResults({
+        persona: scramblerResult.persona,
+        browserTechniques: scramblerResult.techniques,
+        serverResults: poisonResult,
+        timestamp: new Date().toLocaleTimeString()
       });
+      
+      // Show detailed results modal instead of simple toast
+      setShowSpellResults(true);
 
       // Log detailed results
       console.log('🔮 Real-Time Disruption Spell Results:', {
