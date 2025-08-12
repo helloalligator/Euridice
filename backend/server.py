@@ -160,13 +160,21 @@ class PrivacyAnalyzer:
             except Exception as e:
                 logger.warning(f"Web scraping failed for {url}: {e}")
         
-        # If no real data collected, use educational examples
+        # If no real data collected, return error instead of fallback
         if not cookies and not fingerprinting_methods:
-            cookies = self._get_educational_cookies(domain)
-            fingerprinting_methods = self._get_educational_fingerprinting()
-            third_parties = self._get_educational_third_parties(domain)
-            data_source = "Educational Simulation (No live data available)"
-            is_real_data = False
+            raise HTTPException(
+                status_code=422, 
+                detail={
+                    "error": "no_live_data_available",
+                    "message": "Unable to collect live data from this website. This may be due to website restrictions, security measures, or network issues. Please try again with a different URL or check your connection.",
+                    "suggestions": [
+                        "Try a different website (e.g., facebook.com, twitter.com, amazon.com)",
+                        "Ensure the URL is accessible and not blocked",
+                        "Check your internet connection",
+                        "Some websites may block automated analysis"
+                    ]
+                }
+            )
         else:
             data_source = "Live Website Analysis"
             is_real_data = True
