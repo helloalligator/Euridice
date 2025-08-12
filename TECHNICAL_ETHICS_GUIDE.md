@@ -1,4 +1,8 @@
 # Euridice: Technical Implementation & Ethical Framework 🌙
+## An Auralia Archive Project
+
+**Created by:** [ayshao.com](https://ayshao.com)  
+**Repository:** [GitHub](https://github.com/ayshao/euridice)
 
 ## A Comprehensive Guide to User Experience, Code Architecture, Environmental Impact, and Open Source Ethics
 
