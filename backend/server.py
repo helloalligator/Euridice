@@ -192,8 +192,27 @@ class PrivacyAnalyzer:
             message=f"Analysis completed in {processing_time:.2f}s with minimal environmental impact" if server_requests > 0 else "No environmental impact - using cached educational data"
         )
         
-        # Generate analysis metrics
-        threat_level, threat_description, tracking_indicators = self._calculate_threat_level(cookies, fingerprinting_methods, third_parties, domain)
+        # Calculate threat level with domain analysis
+        threat_level, threat_description, tracking_indicators = self._calculate_threat_level(
+            cookies, fingerprinting_methods, third_parties, domain
+        )
+        
+        # Store analysis for research transparency
+        analysis_record = {
+            "url": str(url),
+            "domain": domain,
+            "timestamp": datetime.utcnow(),
+            "threat_level": threat_level,
+            "cookies_found": len(cookies),
+            "fingerprinting_methods": len(fingerprinting_methods),
+            "third_parties": len(third_parties),
+            "total_tracking_mechanisms": len(cookies) + len(fingerprinting_methods) + len(third_parties),
+            "environmental_impact": environmental_impact.dict(),
+            "tracking_indicators": tracking_indicators,
+            "is_high_threat_domain": threat_level == "HIGH" and "Known surveillance platform" in threat_description
+        }
+        await db.analysis_logs.insert_one(analysis_record)
+        
         fingerprinting_score = min(100, len([fp for fp in fingerprinting_methods if fp.detected]) * 15 + 40)
         
         return AnalysisResponse(
@@ -206,7 +225,7 @@ class PrivacyAnalyzer:
             analysisTimestamp=datetime.utcnow().isoformat(),
             dataSource=data_source,
             isRealData=is_real_data,
-            poeticKeyword=self.poetic_keywords[hash(url) % len(self.poetic_keywords)],
+            poeticKeyword=random.choice(self.poetic_keywords),
             cookies=cookies,
             fingerprinting=fingerprinting_methods,
             thirdParties=third_parties,
