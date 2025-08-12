@@ -762,24 +762,66 @@ const PrivacyAnalyzer = () => {
                   </div>
                 )}
 
-                <Button 
-                  onClick={executePoison}
-                  disabled={isPoisoning}
-                  className={`w-full ${isAccessible ? "bg-purple-600 hover:bg-purple-700" : "bg-purple-600 hover:bg-purple-700 sparkle glitch-text"}`}
-                  size="lg"
-                >
-                  {isPoisoning ? (
-                    <>
-                      <Sparkles className="w-5 h-5 mr-2 animate-spin" />
-                      Casting Real-Time Disruption Spell...
-                    </>
-                  ) : (
-                    <>
-                      <Shield className="w-5 h-5 mr-2" />
-                      Execute Real-Time Disruption Spell
-                    </>
+                {/* Real-time spell status */}
+                {isSpellActive && (
+                  <div className={`p-3 rounded-lg ${isAccessible ? "bg-green-50 border border-green-200" : "bg-green-500/10 border border-green-500/30"}`}>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className={`text-sm font-semibold ${isAccessible ? "text-green-900" : "text-green-400"}`}>
+                          ⚡ Real-Time Disruption Active
+                        </p>
+                        <p className={`text-xs ${isAccessible ? "text-green-700" : "text-green-300"}`}>
+                          9 scrambling techniques running continuously
+                        </p>
+                      </div>
+                      <Button
+                        onClick={stopDisruptionSpell}
+                        variant="outline"
+                        size="sm"
+                        className={`${isAccessible ? "border-green-300 text-green-700 hover:bg-green-100" : "border-green-500 text-green-400 hover:bg-green-500/20"}`}
+                      >
+                        Dispel Spell
+                      </Button>
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex gap-3">
+                  <Button 
+                    onClick={executePoison}
+                    disabled={isPoisoning || isSpellActive}
+                    className={`flex-1 ${isAccessible ? "bg-purple-600 hover:bg-purple-700" : "bg-purple-600 hover:bg-purple-700 sparkle glitch-text"}`}
+                    size="lg"
+                  >
+                    {isPoisoning ? (
+                      <>
+                        <Sparkles className="w-5 h-5 mr-2 animate-spin" />
+                        Casting Real-Time Disruption Spell...
+                      </>
+                    ) : isSpellActive ? (
+                      <>
+                        <Shield className="w-5 h-5 mr-2" />
+                        Disruption Spell Active
+                      </>
+                    ) : (
+                      <>
+                        <Shield className="w-5 h-5 mr-2" />
+                        Execute Real-Time Disruption Spell
+                      </>
+                    )}
+                  </Button>
+                  
+                  {isSpellActive && (
+                    <Button
+                      onClick={stopDisruptionSpell}
+                      variant="outline"
+                      size="lg"
+                      className={`${isAccessible ? "border-red-300 text-red-700 hover:bg-red-100" : "border-red-500 text-red-400 hover:bg-red-500/20"}`}
+                    >
+                      Stop Spell
+                    </Button>
                   )}
-                </Button>
+                </div>
               </div>
             </CardContent>
           </Card>
