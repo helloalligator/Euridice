@@ -93,6 +93,16 @@ const PrivacyAnalyzer = () => {
       });
 
       if (!response.ok) {
+        if (response.status === 422) {
+          // Handle no live data available error
+          const errorData = await response.json();
+          toast({
+            title: "No Live Data Available",
+            description: errorData.detail.message,
+            variant: "destructive"
+          });
+          return;
+        }
         throw new Error('Analysis failed');
       }
 
