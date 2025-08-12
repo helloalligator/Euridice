@@ -514,14 +514,50 @@ const PrivacyAnalyzer = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className={`text-3xl font-bold ${isAccessible ? "text-red-600" : "text-red-400 glitch-text"}`}>
-                      {analysisData.threatLevel}
+                    <div className={`text-3xl font-bold ${
+                      analysisData.threatLevel === 'HIGH' ? 
+                        (isAccessible ? "text-red-600" : "text-red-400 glitch-text") :
+                      analysisData.threatLevel === 'MEDIUM' ?
+                        (isAccessible ? "text-yellow-600" : "text-yellow-400") :
+                        (isAccessible ? "text-green-600" : "text-green-400")
+                    }`}>
+                      {analysisData.threatLevel === 'HIGH' ? '🚨 HIGH RISK' : 
+                       analysisData.threatLevel === 'MEDIUM' ? '⚠️ MEDIUM RISK' : 
+                       '✅ LOW RISK'}
                     </div>
                     <p className={`text-sm mt-2 ${isAccessible ? "text-gray-600" : "text-gray-400"}`}>
-                      Based on {analysisData.cookies?.length || 0} tracking cookies, 
-                      {analysisData.fingerprinting?.length || 0} fingerprinting methods, and 
-                      {analysisData.thirdParties?.length || 0} third-party trackers detected.
+                      {analysisData.threatDescription}
                     </p>
+                    {analysisData.trackingIndicators && analysisData.trackingIndicators.length > 0 && (
+                      <div className={`mt-3 p-2 rounded ${
+                        analysisData.threatLevel === 'HIGH' ? 
+                          (isAccessible ? "bg-red-50 border border-red-200" : "bg-red-500/10 border border-red-500/30") :
+                        analysisData.threatLevel === 'MEDIUM' ?
+                          (isAccessible ? "bg-yellow-50 border border-yellow-200" : "bg-yellow-500/10 border border-yellow-500/30") :
+                          (isAccessible ? "bg-green-50 border border-green-200" : "bg-green-500/10 border border-green-500/30")
+                      }`}>
+                        <p className={`text-xs font-semibold mb-1 ${
+                          analysisData.threatLevel === 'HIGH' ? 
+                            (isAccessible ? "text-red-800" : "text-red-400") :
+                          analysisData.threatLevel === 'MEDIUM' ?
+                            (isAccessible ? "text-yellow-800" : "text-yellow-400") :
+                            (isAccessible ? "text-green-800" : "text-green-400")
+                        }`}>
+                          🔍 Tracking Indicators Detected:
+                        </p>
+                        <ul className={`text-xs space-y-1 ${
+                          analysisData.threatLevel === 'HIGH' ? 
+                            (isAccessible ? "text-red-700" : "text-red-300") :
+                          analysisData.threatLevel === 'MEDIUM' ?
+                            (isAccessible ? "text-yellow-700" : "text-yellow-300") :
+                            (isAccessible ? "text-green-700" : "text-green-300")
+                        }`}>
+                          {analysisData.trackingIndicators.map((indicator, index) => (
+                            <li key={index}>• {indicator}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
 
